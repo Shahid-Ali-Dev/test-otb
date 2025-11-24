@@ -1,0 +1,152 @@
+{% extends "base.html" %}
+
+{% block title %}Profile - Shout OTB{% endblock %}
+
+
+{% block content %}
+<section class="py-5">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-8 col-md-10">
+                <div class="auth-card fade-in-element">
+                    <!-- Profile Header -->
+                    <div class="profile-header">
+                        {% if current_user.profile_picture %}
+                        <img src="{{ current_user.profile_picture }}" 
+                            alt="Profile Picture" 
+                            class="profile-picture-large">
+                        {% else %}
+                        <div class="profile-picture-large bg-orange text-dark d-flex align-items-center justify-content-center"
+                             style="font-size: 2.5rem; background: var(--accent-orange) !important;">
+                            {{ current_user.name[0]|upper if current_user.name else 'U' }}
+                        </div>
+                        {% endif %}
+                        <div class="profile-info">
+                            <h4>{{ current_user.name }}</h4>
+                            <p class="text-muted mb-0">{{ current_user.email }}</p>
+                            {% if current_user.occupation %}
+                            <p class="text-muted mb-0">{{ current_user.occupation }}</p>
+                            {% endif %}
+                            <small class="badge bg-orange mt-2">{{ current_user.provider|title }} Account</small>
+                        </div>
+                    </div>
+
+                    <!-- Profile Edit Form -->
+                    <form method="POST" action="{{ url_for('profile') }}" enctype="multipart/form-data" id="profileForm">
+                        {{ form.hidden_tag() }}
+                        
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                {{ form.name.label(class="form-label") }}
+                                {{ form.name(class="form-control", placeholder="Enter your full name") }}
+                                {% if form.name.errors %}
+                                    <div class="text-danger">
+                                        {% for error in form.name.errors %}
+                                            <small>{{ error }}</small>
+                                        {% endfor %}
+                                    </div>
+                                {% endif %}
+                            </div>
+                            
+                            <div class="col-md-6 mb-3">
+                                {{ form.occupation.label(class="form-label") }}
+                                {{ form.occupation(class="form-control", placeholder="e.g., Marketing Manager, Developer") }}
+                                {% if form.occupation.errors %}
+                                    <div class="text-danger">
+                                        {% for error in form.occupation.errors %}
+                                            <small>{{ error }}</small>
+                                        {% endfor %}
+                                    </div>
+                                {% endif %}
+                            </div>
+                        </div>
+                        
+                        <!-- Enhanced Image Upload with Cropper -->
+                        <div class="profile-image-section">
+                            <label class="form-label">Profile Picture</label>
+                            <div class="preview-container">
+                                <div class="upload-placeholder" onclick="document.getElementById('profile_picture').click()">
+                                    <div class="text-center">
+                                        <i class="fas fa-cloud-upload-alt"></i>
+                                        <p class="text-muted mb-1 mt-2">Click to upload image</p>
+                                        <small class="text-muted">PNG, JPG, JPEG, GIF - Max 5MB</small>
+                                    </div>
+                                </div>
+                                <img id="imagePreview" class="image-preview" alt="Preview">
+                            </div>
+                            {{ form.profile_picture(class="form-control file-input", id="profile_picture", onchange="previewImage(this)") }}
+                            {% if form.profile_picture.errors %}
+                                <div class="text-danger">
+                                    {% for error in form.profile_picture.errors %}
+                                        <small>{{ error }}</small>
+                                    {% endfor %}
+                                </div>
+                            {% endif %}
+                        </div>
+                        
+                        <div class="d-grid mb-4">
+                            {{ form.submit(class="btn btn-custom btn-lg") }}
+                        </div>
+                    </form>
+
+                    <!-- Account Information -->
+                    <div class="row mt-4">
+                        <div class="col-md-4 mb-3">
+                            <div class="service-card text-center h-100">
+                                <i class="fas fa-user-tag text-orange mb-3" style="font-size: 2rem;"></i>
+                                <h6>User Role</h6>
+                                <p class="text-muted small">{{ current_user.role|title }}</p>
+                            </div>
+                        </div>
+                        
+                        <div class="col-md-4 mb-3">
+                            <div class="service-card text-center h-100">
+                                <i class="fas fa-calendar text-orange mb-3" style="font-size: 2rem;"></i>
+                                <h6>Member Since</h6>
+                                <p class="text-muted small">{{ current_user.created_at.strftime('%b %d, %Y') if current_user.created_at else 'Recently' }}</p>
+                            </div>
+                        </div>
+                        
+                        <div class="col-md-4 mb-3">
+                            <div class="service-card text-center h-100">
+                                <i class="fas fa-clock text-orange mb-3" style="font-size: 2rem;"></i>
+                                <h6>Last Login</h6>
+                                <p class="text-muted small">{{ current_user.last_login.strftime('%b %d, %Y') if current_user.last_login else 'Recently' }}</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="d-grid gap-2 mt-4">
+                        <a href="{{ url_for('logout') }}" class="btn btn-outline-custom">
+                            <i class="fas fa-sign-out-alt me-2"></i>Logout
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Image Crop Modal -->
+<div class="crop-overlay" id="cropOverlay">
+    <div class="crop-container">
+        <div class="crop-header">
+            <h5>Crop Your Profile Picture</h5>
+            <button class="crop-close" onclick="closeCrop()">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+        <div class="crop-preview-container">
+            <img id="cropImage" style="max-width: 100%;">
+        </div>
+        <div class="crop-actions">
+            <button class="crop-btn crop-btn-secondary" onclick="closeCrop()">
+                <i class="fas fa-times me-2"></i>Cancel
+            </button>
+            <button class="crop-btn crop-btn-primary" onclick="applyCrop()">
+                <i class="fas fa-check me-2"></i>Apply Crop
+            </button>
+        </div>
+    </div>
+</div>
+{% endblock %}

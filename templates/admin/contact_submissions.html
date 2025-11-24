@@ -1,0 +1,181 @@
+{% extends "base.html" %}
+
+{% block title %}Contact Submissions - Admin{% endblock %}
+
+{% block content %}
+<div class="container-fluid py-5" style="background: var(--primary-black); min-height: 100vh;">
+    <div class="container fade-in-element">
+        <!-- Header -->
+        <div class="row mb-5">
+            <div class="col-12">
+                <nav aria-label="breadcrumb" class="mb-3 breadcrumb-admin">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="{{ url_for('admin_portfolio') }}">Admin</a></li>
+                        <li class="breadcrumb-item active">Contact Submissions</li>
+                    </ol>
+                </nav>
+                
+                <div class="d-flex justify-content-between align-items-center">
+                    <h1 class="hero-title" style="font-size: 2.5rem;">Contact Submissions</h1>
+                    <span class="badge bg-orange fs-6">{{ submissions|length }} submissions</span>
+                </div>
+                <p class="text-muted">Manage and review all contact form inquiries</p>
+            </div>
+        </div>
+
+        <!-- Stats Cards -->
+        <div class="row mb-4">
+            <div class="col-md-3 mb-3">
+                <div class="admin-stat-card">
+                    <div class="d-flex align-items-center">
+                        <div class="admin-stat-icon me-3">
+                            <i class="fas fa-inbox"></i>
+                        </div>
+                        <div>
+                            <h4 class="mb-0 fw-bold text-light">{{ submissions|length }}</h4>
+                            <p class="text-muted mb-0">Total</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3 mb-3">
+                <div class="admin-stat-card">
+                    <div class="d-flex align-items-center">
+                        <div class="admin-stat-icon me-3">
+                            <i class="fas fa-clock"></i>
+                        </div>
+                        <div>
+                            <h4 class="mb-0 fw-bold text-light">{{ today_count }}</h4>
+                            <p class="text-muted mb-0">Today</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3 mb-3">
+                <div class="admin-stat-card">
+                    <div class="d-flex align-items-center">
+                        <div class="admin-stat-icon me-3">
+                            <i class="fas fa-building"></i>
+                        </div>
+                        <div>
+                            <h4 class="mb-0 fw-bold text-light">{{ company_count }}</h4>
+                            <p class="text-muted mb-0">With Company</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3 mb-3">
+                <div class="admin-stat-card">
+                    <div class="d-flex align-items-center">
+                        <div class="admin-stat-icon me-3">
+                            <i class="fas fa-phone"></i>
+                        </div>
+                        <div>
+                            <h4 class="mb-0 fw-bold text-light">{{ phone_count }}</h4>
+                            <p class="text-muted mb-0">With Phone</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Submissions Table -->
+        <div class="admin-table">
+            <div class="p-4 border-bottom" style="border-color: rgba(255,255,255,0.1) !important;">
+                <h5 class="mb-0 text-light">All Submissions</h5>
+            </div>
+            {% if submissions %}
+            <div class="table-responsive">
+                <table class="table table-hover align-middle mb-0">
+                    <thead>
+                        <tr>
+                            <th class="ps-4 text-light">Name</th>
+                            <th class="text-light">Contact</th>
+                            <th class="text-light">Company</th>
+                            <th class="text-light">Service</th>
+                            <th class="text-light">Budget</th>
+                            <th class="text-light">Submitted</th>
+                            <th class="text-end pe-4 text-light">Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for submission in submissions %}
+                        <tr>
+                            <td class="ps-4">
+                                <div class="d-flex align-items-center">
+                                    <div class="admin-stat-icon me-3" style="width: 50px; height: 50px;">
+                                        <i class="fas fa-user"></i>
+                                    </div>
+                                    <div>
+                                        <strong class="--primary-black">{{ submission.name }}</strong>
+                                        {% if not submission.company %}
+                                            <span class="badge bg-secondary ms-2">No Company</span>
+                                        {% endif %}
+                                    </div>
+                                </div>
+                            </td>
+                            <td>
+                                <div>
+                                    <div><a href="mailto:{{ submission.email }}" class="text-orange text-decoration-none">{{ submission.email }}</a></div>
+                                    {% if submission.phone %}
+                                    <small class="text-muted">{{ submission.phone }}</small>
+                                    {% else %}
+                                    <small class="text-muted">No phone</small>
+                                    {% endif %}
+                                </div>
+                            </td>
+                            <td>
+                                {% if submission.company %}
+                                <span class="badge badge-admin">{{ submission.company }}</span>
+                                {% else %}
+                                <span class="text-muted">—</span>
+                                {% endif %}
+                            </td>
+                            <td>
+                                {% if submission.service %}
+                                <span class="badge badge-admin">{{ submission.service }}</span>
+                                {% else %}
+                                <span class="text-muted">—</span>
+                                {% endif %}
+                            </td>
+                            <td>
+                                {% if submission.budget %}
+                                <span class="badge badge-admin">{{ submission.budget }}</span>
+                                {% else %}
+                                <span class="text-muted">—</span>
+                                {% endif %}
+                            </td>
+                            <td>
+                                <small class="text-muted" data-bs-toggle="tooltip" title="{{ submission.submitted_at.strftime('%Y-%m-%d %H:%M:%S') }}">
+                                    {{ submission.submitted_at.strftime('%b %d, %Y') }}
+                                </small>
+                            </td>
+                            <td class="text-end pe-4">
+                                <div class="btn-group">
+                                    <button class="btn btn-sm-outline admin-view-btn" data-submission-id="{{ submission.id }}" data-bs-toggle="tooltip" title="View Details">
+                                        <i class="fas fa-eye"></i> View
+                                    </button>
+                                    <a href="mailto:{{ submission.email }}?subject=Re: Your inquiry to Shout OTB&body=Hi {{ submission.name }}," class="btn btn-sm-outline" data-bs-toggle="tooltip" title="Reply via Email">
+                                        <i class="fas fa-reply"></i>
+                                    </a>
+                                </div>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+            {% else %}
+            <div class="text-center py-5">
+                <div class="mb-4">
+                    <i class="fas fa-inbox fa-4x text-muted opacity-25"></i>
+                </div>
+                <h4 class="text-muted">No submissions yet</h4>
+                <p class="text-muted">Contact form submissions will appear here.</p>
+            </div>
+            {% endif %}
+        </div>
+    </div>
+</div>
+<script src="{{ url_for('static', filename='js/admin.js') }}"></script>
+{% endblock %}

@@ -1,0 +1,55 @@
+{% extends "base.html" %}
+
+{% block title %}{{ error_title }} - Shout OTB{% endblock %}
+
+{% block content %}
+<section class="py-5" style="background: var(--primary-black); min-height: 80vh;">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-6 text-center">
+                <div class="error-page fade-in-element">
+                    <!-- Error Code -->
+                    <h1 class="display-1 text-orange" style="font-size: 8rem; font-weight: 800;">{{ error_code }}</h1>
+                    
+                    <!-- Error Title -->
+                    <h2 class="mb-3 text-light">{{ error_title }}</h2>
+                    
+                    <!-- Error Description -->
+                    <p class="text-muted mb-4">{{ error_description }}</p>
+                    
+                    
+                    <!-- Action Buttons -->
+                    <div class="d-flex justify-content-center gap-3 flex-wrap mt-4">
+                        <a href="{{ url_for('index') }}" class="btn btn-custom" style="min-width: 180px;">
+                            <i class="fas fa-home me-2"></i>Go Home
+                        </a>
+                        
+                        {% if error_code == 403 %}
+                        <a href="{{ url_for('login') }}" class="btn btn-outline-custom" style="min-width: 180px;">
+                            <i class="fas fa-sign-in-alt me-2"></i>Login
+                        </a>
+                        {% elif error_code == 429 %}
+                        <button onclick="window.location.reload()" class="btn btn-outline-custom" style="min-width: 180px;">
+                            <i class="fas fa-redo me-2"></i>Try Again
+                        </button>
+                        {% else %}
+                        <a href="{{ url_for('contact') }}" class="btn btn-outline-custom" style="min-width: 180px;">
+                            <i class="fas fa-envelope me-2"></i>Contact Support
+                        </a>
+                        {% endif %}
+                    </div>
+                    
+                    <!-- Additional Help -->
+                    <div class="mt-5">
+                        <p class="text-muted small">
+                            If you believe this is an error, please 
+                            <a href="{{ url_for('contact') }}" class="text-orange">contact us</a>.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+{% endblock %}

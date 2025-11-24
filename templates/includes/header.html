@@ -1,0 +1,112 @@
+<header>
+    <nav class="navbar navbar-expand-lg navbar-custom fixed-top">
+        <div class="container">
+            <a class="navbar-brand d-flex align-items-center" href="{{ url_for('index') }}">
+                <!-- Logo Image -->
+                <img src="{{ url_for('static', filename='images/Asset 22.png') }}"
+                    alt="SHOUT OTB Logo"
+                    style="width: 40px; height: 40px; object-fit: contain; margin-right: 10px; border-radius: 8px;">
+                SHOUT OTB
+            </a>
+
+            
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon">
+                    <i class="fas fa-bars" style="color: var(--accent-orange);"></i>
+                </span>
+            </button>
+            
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav me-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ url_for('index') }}">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ url_for('services') }}">Services</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ url_for('portfolio') }}">Portfolio</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ url_for('contact') }}">Contact</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ url_for('about') }}">About</a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link" href="#" role="button" data-bs-toggle="dropdown">
+                            More
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="{{ url_for('youtube_analyzer') }}">Youtube Labs</a></li>
+                            <li><a class="dropdown-item" href="{{ url_for('case_studies') }}">Case Studies</a></li>
+                        </ul>
+                    </li>
+                </ul>
+                
+                <ul class="navbar-nav">
+                    {% if current_user.is_authenticated %}
+                    <li class="nav-item dropdown">
+                        <a class="nav-link d-flex align-items-center" href="#" role="button" data-bs-toggle="dropdown">
+                            {% if current_user.profile_picture %}
+                            <img src="{{ current_user.profile_picture }}" 
+                                alt="Profile" 
+                                class="rounded-circle me-2"
+                                style="width: 32px; height: 32px; object-fit: cover;">
+                            {% else %}
+                            <div class="rounded-circle bg-orange text-dark d-flex align-items-center justify-content-center me-2"
+                                style="width: 32px; height: 32px; font-size: 0.8rem; background: var(--accent-orange) !important;">
+                                {{ current_user.name[0]|upper if current_user.name else 'U' }}
+                            </div>
+                            {% endif %}
+                            {{ current_user.name }}
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="{{ url_for('profile') }}">
+                                <i class="fas fa-user me-2"></i>Profile
+                            </a></li>
+                            {% if current_user.role == 'admin' %}
+                            <li><a class="dropdown-item" href="{{ url_for('admin_portfolio') }}">
+                                <i class="fas fa-cog me-2"></i>Portfolio Dashboard
+                            </a></li>
+                            <li><a class="dropdown-item" href="{{ url_for('admin_reviews') }}">
+                                <i class="fas fa-cog me-2"></i>Reviews Dashboard
+                            </a></li>
+                            <li><a class="dropdown-item" href="{{ url_for('admin_contact_submissions') }}">
+                                <i class="fas fa-cog me-2"></i>Contact Dashboard
+                            </a></li>
+                            <li><a class="dropdown-item" href="{{ url_for('profile_analyzer') }}">
+                                <i class="fas fa-cog me-2"></i>Analytics Dashboard
+                            </a></li>
+                            {% endif %}
+                            <li><hr class="dropdown-divider"></li>
+                            <li><a class="dropdown-item" href="{{ url_for('logout') }}">
+                                <i class="fas fa-sign-out-alt me-2"></i>Logout
+                            </a></li>
+                        </ul>
+                    
+                    </li>
+                    {% else %}
+                    <li class="nav-item dropdown">
+                        <a class="nav-link" href="#" role="button" data-bs-toggle="dropdown">
+                            <i class="fas fa-user me-1"></i> Account
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="{{ url_for('login') }}">
+                                <i class="fas fa-sign-in-alt me-2"></i>Login
+                            </a></li>
+                            <li><a class="dropdown-item" href="{{ url_for('register') }}">
+                                <i class="fas fa-user-plus me-2"></i>Sign Up
+                            </a></li>
+                            <!-- <li><hr class="dropdown-divider"></li>
+                            <li><a class="dropdown-item" href="#">
+                                <i class="fab fa-google me-2"></i>Login with Google
+                            </a></li> -->
+                        </ul>
+                    </li>
+                    {% endif %}
+                </ul>
+            </div>
+        </div>
+    </nav>
+</header>

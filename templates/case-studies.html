@@ -1,0 +1,897 @@
+{% extends "base.html" %}
+
+{% block title %}Case Studies - Shout OTB{% endblock %}
+
+{% block content %}
+<!-- Case Studies Hero Section -->
+<section class="hero-section"
+         style="background-image: 
+                    url('{{ url_for('static', filename='images/hero bg cs.avif') }}'),
+                    url('{{ url_for('static', filename='images/hero bg cs.webp') }}'),
+                    url('{{ url_for('static', filename='images/hero bg cs.png') }}');
+                background-position: center;
+                background-size: cover;
+                background-repeat: no-repeat;
+                position: relative;
+                padding: 120px 0;
+                border-radius: 20px;
+                overflow: hidden;">
+
+    <div class="container position-relative" style="z-index: 2;">
+        <div class="row align-items-center text-center text-lg-start justify-content-center">
+            <div class="col-lg-8">
+                <div class="hero-content fade-in-element">
+                    <h1 class="hero-title">Case Studies</h1>
+                    <p class="hero-subtitle text-light" style="font-size: 1.25rem;">
+                        Real results, real impact. See how we've transformed businesses with creative digital solutions.
+                    </p>
+                    <a href="{{ url_for('contact') }}" class="btn btn-custom btn-magnetic mt-3">
+                        Start Your Project
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Case Studies Intro Section -->
+<section class="py-4" style="background: var(--secondary-black);">
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-12">
+        <div class="portfolio-filter-container text-center">
+          
+          <!-- Unified btn-group for JS -->
+          <div class="btn-group flex-wrap justify-content-center d-flex" role="group">
+            <button type="button" class="btn btn-outline-custom active fade-in-element delay-1" data-filter="all">All Projects</button>
+            <button type="button" class="btn btn-outline-custom fade-in-element delay-2" data-filter="animation">3D Animation</button>
+            <button type="button" class="btn btn-outline-custom fade-in-element delay-3" data-filter="video">Video Editing</button>
+            <button type="button" class="btn btn-outline-custom fade-in-element delay-4" data-filter="social">Social Media</button>
+            <button type="button" class="btn btn-outline-custom fade-in-element delay-5" data-filter="strategy">Marketing Strategy</button>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Case Studies Grid Section -->
+<section class="py-5">
+    <div class="container">
+        <div class="portfolio-grid" id="caseStudiesGrid">
+            
+            <!-- Ubiq Case Study -->
+            <div class="video-card fade-in-element delay-1" data-category="animation video">
+                <div class="video-container">
+                    <div class="video-thumbnail" onclick="caseStudyManager.openCaseStudy(1)">
+                        <img src="{{ url_for('static', filename='brand_images/ubiq.webp') }}" 
+                             alt="Ubiq Moldrix Device Animation" class="thumbnail-img">
+                    </div>
+                </div>
+                <div class="video-content">
+                    <h5>Ubiq: Moldrix Device 3D Animation</h5>
+                    <p class="text-muted mb-3">Created a stunning 3D animation from scratch showcasing Ubiq's innovative Moldrix device with AI voiceover and sound effects.</p>
+                    <div class="case-study-stats">
+                        <div class="stat-item">
+                            <span class="stat-number">100%</span>
+                            <span class="stat-label">Custom Animation</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-number">3D</span>
+                            <span class="stat-label">Product Showcase</span>
+                        </div>
+                    </div>
+                    <div class="case-study-tags">
+                        <span class="badge bg-orange">3D Animation</span>
+                        <span class="badge bg-orange">Video Editing</span>
+                        <span class="badge bg-orange">AI Voice</span>
+                    </div>
+                    <div class="video-actions">
+                        <button class="btn btn-outline-custom btn-fixed" onclick="caseStudyManager.openCaseStudy(1)">
+                            <i class="fas fa-eye me-2"></i>View Case Study
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Lalsa Garments Case Study -->
+            <div class="video-card fade-in-element delay-2" data-category="video social">
+                <div class="video-container">
+                    <div class="video-thumbnail" onclick="caseStudyManager.openCaseStudy(2)">
+                        <img src="{{ url_for('static', filename='brand_images/lalsa.webp') }}" 
+                             alt="Lalsa Garments Rakhi Reel" class="thumbnail-img">
+                    </div>
+                </div>
+                <div class="video-content">
+                    <h5>Lalsa Garments: Festive Brand Campaign</h5>
+                    <p class="text-muted mb-3">Produced engaging Rakhi festival reels and 3D clothing animations that boosted brand visibility and customer engagement.</p>
+                    <div class="case-study-stats">
+                        <div class="stat-item">
+                            <span class="stat-number">2.5x</span>
+                            <span class="stat-label">Engagement</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-number">15K+</span>
+                            <span class="stat-label">Reach</span>
+                        </div>
+                    </div>
+                    <div class="case-study-tags">
+                        <span class="badge bg-orange">Video Editing</span>
+                        <span class="badge bg-orange">Social Media</span>
+                        <span class="badge bg-orange">3D Animation</span>
+                    </div>
+                    <div class="video-actions">
+                        <button class="btn btn-outline-custom btn-fixed" onclick="caseStudyManager.openCaseStudy(2)">
+                            <i class="fas fa-eye me-2"></i>View Case Study
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Asha Jain Case Study -->
+            <div class="video-card fade-in-element delay-3" data-category="strategy social">
+                <div class="video-container">
+                    <div class="video-thumbnail" onclick="caseStudyManager.openCaseStudy(3)">
+                        <img src="{{ url_for('static', filename='brand_images/asha_jain.webp') }}" 
+                             alt="Asha Jain Astrology Channel" class="thumbnail-img">
+                        <!-- <div class="play-button-overlay">
+                            <i class="fas fa-eye"></i>
+                        </div> -->
+                    </div>
+                </div>
+                <div class="video-content">
+                    <h5>Asha Jain: Astrology Channel Growth</h5>
+                    <p class="text-muted mb-3">Developed comprehensive content strategy and creative ideas to boost channel growth and audience engagement for astrology content.</p>
+                    <div class="case-study-stats">
+                        <div class="stat-item">
+                            <span class="stat-number">3x</span>
+                            <span class="stat-label">Content Ideas</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-number">200%</span>
+                            <span class="stat-label">Strategy Impact</span>
+                        </div>
+                    </div>
+                    <div class="case-study-tags">
+                        <span class="badge bg-orange">Marketing Strategy</span>
+                        <span class="badge bg-orange">Content Creation</span>
+                        <span class="badge bg-orange">Social Media</span>
+                    </div>
+                    <div class="video-actions">
+                        <button class="btn btn-outline-custom btn-fixed" onclick="caseStudyManager.openCaseStudy(3)">
+                            <i class="fas fa-eye me-2"></i>View Case Study
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- Load More -->
+        <div class="text-center mt-5 fade-in-element delay-7">
+            <button class="btn btn-outline-custom btn-magnetic" id="loadMoreCaseStudies">
+                <i class="fas fa-plus me-2"></i>Load More Case Studies
+            </button>
+        </div>
+    </div>
+</section>
+
+<!-- Testimonials Section -->
+<section class="py-5" style="background: var(--secondary-black);">
+    <div class="container">
+        <div class="row mb-5 text-center">
+            <div class="col-12">
+                <h2 class="section-title fade-in-element">What Our Clients Say</h2>
+                <p class="section-subtitle fade-in-element delay-1">Real feedback from businesses we've helped grow.</p>
+            </div>
+        </div>
+
+        <div class="row">
+            <!-- Ubiq Testimonial -->
+            <div class="col-lg-4 col-md-6 mb-4">
+                <div class="service-card fade-in-element delay-1">
+                    <div class="testimonial-content">
+                        <div class="testimonial-header mb-3">
+                            <div class="client-logo mb-2">
+                                <i class="fas fa-microchip fa-2x text-orange"></i>
+                            </div>
+                            <h5 class="text-orange mb-1">Ubiq Team</h5>
+                            <p class="text-muted small">Technology Hardware Company</p>
+                        </div>
+                        <p class="testimonial-text">
+                            "Shout OTB transformed our complex Moldrix device into an engaging 3D animation that perfectly showcases our technology. The AI voiceover and sound effects added professional touch we needed."
+                        </p>
+                        <div class="star-rating mt-3">
+                            <i class="fas fa-star text-warning"></i>
+                            <i class="fas fa-star text-warning"></i>
+                            <i class="fas fa-star text-warning"></i>
+                            <i class="fas fa-star text-warning"></i>
+                            <i class="fas fa-star text-warning"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Lalsa Garments Testimonial -->
+            <div class="col-lg-4 col-md-6 mb-4">
+                <div class="service-card fade-in-element delay-2">
+                    <div class="testimonial-content">
+                        <div class="testimonial-header mb-3">
+                            <div class="client-logo mb-2">
+                                <i class="fas fa-tshirt fa-2x text-orange"></i>
+                            </div>
+                            <h5 class="text-orange mb-1">Lalsa Garments</h5>
+                            <p class="text-muted small">Fashion & Clothing Brand</p>
+                        </div>
+                        <p class="testimonial-text">
+                            "The Rakhi reel and 3D clothing animations created by Shout OTB significantly boosted our festive sales. Their creative approach to showcasing our products was exceptional and captivated our audience."
+                        </p>
+                        <div class="star-rating mt-3">
+                            <i class="fas fa-star text-warning"></i>
+                            <i class="fas fa-star text-warning"></i>
+                            <i class="fas fa-star text-warning"></i>
+                            <i class="fas fa-star text-warning"></i>
+                            <i class="fas fa-star text-warning"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Asha Jain Testimonial -->
+            <div class="col-lg-4 col-md-6 mb-4">
+                <div class="service-card fade-in-element delay-3">
+                    <div class="testimonial-content">
+                        <div class="testimonial-header mb-3">
+                            <div class="client-logo mb-2">
+                                <i class="fas fa-star-and-crescent fa-2x text-orange"></i>
+                            </div>
+                            <h5 class="text-orange mb-1">Asha Jain</h5>
+                            <p class="text-muted small">Astrology Content Creator</p>
+                        </div>
+                        <p class="testimonial-text">
+                            "Shout OTB's content strategy and creative ideas helped me connect better with my audience. Their understanding of content marketing transformed my channel's growth trajectory and audience engagement."
+                        </p>
+                        <div class="star-rating mt-3">
+                            <i class="fas fa-star text-warning"></i>
+                            <i class="fas fa-star text-warning"></i>
+                            <i class="fas fa-star text-warning"></i>
+                            <i class="fas fa-star text-warning"></i>
+                            <i class="fas fa-star text-warning"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- CTA Section -->
+<section class="py-5">
+    <div class="container text-center">
+        <h2 class="mb-4 fade-in-element">Ready to Write Your Success Story?</h2>
+        <p class="mb-4 fade-in-element delay-1">Let's create your next case study together.</p>
+        <div class="fade-in-element delay-2">
+            <a href="{{ url_for('contact') }}" class="btn btn-custom btn-magnetic fade-in-element delay-2 me-0 me-md-3 mb-3 mb-md-0">Start Your Project</a>
+            <a href="{{ url_for('portfolio') }}" class="btn btn-outline-custom btn-magnetic fade-in-element delay-3">View Our Portfolio</a>
+        </div>
+    </div>
+</section>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+/* =========================
+   CASE STUDY MANAGER - UPDATED WITH REAL CLIENTS
+========================= */
+class CaseStudyManager {
+    constructor() {
+        this.caseStudies = {
+            1: {
+                title: "Ubiq: Moldrix Device 3D Animation",
+                category: "3D Animation & Video Production",
+                client: "Ubiq",
+                duration: "2 Weeks",
+                industry: "Technology Hardware",
+                results: {
+                    quality: "Professional",
+                    delivery: "On Time",
+                    impact: "High Engagement",
+                    satisfaction: "100%"
+                },
+                challenge: "Ubiq needed to showcase their innovative Moldrix device in a way that would capture attention and demonstrate its complex features effectively to potential clients and investors.",
+                solution: "Created a complete 3D animation from scratch, including modeling, texturing, lighting, and animation. Enhanced with professional AI voiceover and custom sound effects to create an engaging product showcase video.",
+                approach: [
+                    { phase: "Concept Development", description: "Understood product features and created storyboard for the animation sequence" },
+                    { phase: "3D Modeling", description: "Built detailed 3D model of Moldrix device with accurate dimensions and features" },
+                    { phase: "Animation & Texturing", description: "Created smooth animations showcasing device functionality with realistic materials" },
+                    { phase: "Post-Production", description: "Added AI voiceover, sound effects, and final video polishing" }
+                ],
+                technologies: ["Blender 3D", "After Effects", "AI Voice Synthesis", "Sound Design"],
+                testimonial: {
+                    text: "The 3D animation created by Shout OTB perfectly captured our Moldrix device's innovative features. The attention to detail and professional quality exceeded our expectations.",
+                    author: "Ubiq Team",
+                    role: "Technology Hardware Company"
+                }
+            },
+            2: {
+                title: "Lalsa Garments: Festive Brand Campaign",
+                category: "Video Production & Social Media",
+                client: "Lalsa Garments", 
+                duration: "3 Weeks",
+                industry: "Fashion & Retail",
+                results: {
+                    engagement: "2.5x Increase",
+                    reach: "15,000+",
+                    sales: "Festive Boost",
+                    branding: "Enhanced"
+                },
+                challenge: "Lalsa Garments wanted to create impactful festive content for Rakhi season that would showcase their clothing line and drive sales through engaging social media content.",
+                solution: "Produced high-quality Rakhi festival reels with complete video editing and created stunning 3D animations showcasing their clothing collection. Developed a cohesive social media strategy around the festive campaign.",
+                approach: [
+                    { phase: "Content Strategy", description: "Developed festive campaign theme and content calendar for Rakhi season" },
+                    { phase: "Video Production", description: "Shot and edited engaging reels showcasing festive clothing collection" },
+                    { phase: "3D Animation", description: "Created dynamic 3D animations of clothing items for enhanced visual appeal" },
+                    { phase: "Social Media Deployment", description: "Optimized and scheduled content across platforms for maximum reach" }
+                ],
+                technologies: ["Premiere Pro", "3D Animation", "Instagram Reels", "Social Media Strategy"],
+                testimonial: {
+                    text: "Shout OTB's creative approach to our Rakhi campaign was outstanding. The 3D animations and video editing brought our clothing to life and significantly boosted our festive sales.",
+                    author: "Lalsa Garments Team", 
+                    role: "Fashion Brand"
+                }
+            },
+            3: {
+                title: "Asha Jain: Astrology Channel Growth Strategy",
+                category: "Content Strategy & Marketing",
+                client: "Asha Jain",
+                duration: "Ongoing Support", 
+                industry: "Content Creation & Astrology",
+                results: {
+                    strategy: "Comprehensive",
+                    ideas: "3x More Content",
+                    engagement: "Improved",
+                    growth: "Accelerated"
+                },
+                challenge: "Asha Jain, an astrology content creator, needed strategic guidance and creative content ideas to grow her channel, improve audience engagement, and establish her brand in the competitive astrology niche.",
+                solution: "Provided comprehensive marketing strategy, content planning, and creative ideas tailored to the astrology niche. Developed engagement strategies and content formats that resonated with her target audience.",
+                approach: [
+                    { phase: "Channel Analysis", description: "Analyzed current content performance and audience demographics" },
+                    { phase: "Strategy Development", description: "Created tailored content strategy and engagement plan for astrology niche" },
+                    { phase: "Content Ideation", description: "Generated innovative content ideas and formats for better audience connection" },
+                    { phase: "Growth Planning", description: "Developed long-term growth strategy and engagement techniques" }
+                ],
+                technologies: ["Content Strategy", "Audience Analysis", "Social Media Planning", "Engagement Techniques"],
+                testimonial: {
+                    text: "The strategic guidance and creative content ideas from Shout OTB transformed how I approach content creation. Their understanding of audience engagement helped me connect better with my followers.",
+                    author: "Asha Jain",
+                    role: "Astrology Content Creator" 
+                }
+            }
+        };
+        this.init();
+    }
+
+    init() {
+        this.createCaseStudyModal();
+        this.initFilters();
+        this.initLoadMore();
+    }
+
+    createCaseStudyModal() {
+        const modalHTML = `
+            <div class="modal fade admin-modal" id="caseStudyModal" tabindex="-1">
+                <div class="modal-dialog modal-xl">
+                    <div class="modal-content">
+                        <div class="modal-header border-secondary">
+                            <h5 class="modal-title text-orange">
+                                <i class="fas fa-file-alt me-2"></i>Case Study Details
+                            </h5>
+                            <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+                        </div>
+                        <div class="modal-body" id="caseStudyModalContent">
+                            <!-- Content loaded dynamically -->
+                        </div>
+                        <div class="modal-footer border-secondary">
+                            <button type="button" class="btn btn-sm-outline" data-bs-dismiss="modal">Close</button>
+                            <a href="{{ url_for('contact') }}" class="btn btn-sm-custom">
+                                <i class="fas fa-rocket me-1"></i>Start Your Project
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        `;
+        if (!document.getElementById('caseStudyModal')) {
+            document.body.insertAdjacentHTML('beforeend', modalHTML);
+        }
+    }
+
+    initFilters() {
+        const filterButtons = document.querySelectorAll('.portfolio-filter-container .btn-outline-custom');
+        const caseStudies = document.querySelectorAll('.video-card[data-category]');
+        
+        filterButtons.forEach(button => {
+            button.addEventListener('click', function() {
+                const filter = this.getAttribute('data-filter');
+                
+                filterButtons.forEach(btn => btn.classList.remove('active'));
+                this.classList.add('active');
+                
+                caseStudies.forEach(study => {
+                    const categories = study.getAttribute('data-category').split(' ');
+                    if (filter === 'all' || categories.includes(filter)) {
+                        study.style.display = 'block';
+                        setTimeout(() => {
+                            study.style.opacity = '1';
+                            study.style.transform = 'translateY(0)';
+                        }, 100);
+                    } else {
+                        study.style.opacity = '0';
+                        study.style.transform = 'translateY(20px)';
+                        setTimeout(() => {
+                            study.style.display = 'none';
+                        }, 300);
+                    }
+                });
+            });
+        });
+    }
+
+    initLoadMore() {
+        const loadMoreBtn = document.getElementById('loadMoreCaseStudies');
+        if (loadMoreBtn) {
+            loadMoreBtn.addEventListener('click', function() {
+                // For now, show message since we only have 3 case studies
+                const toast = document.createElement('div');
+                toast.className = 'toast align-items-center text-white bg-orange border-0';
+                toast.innerHTML = `
+                    <div class="d-flex">
+                        <div class="toast-body">
+                            <i class="fas fa-info-circle me-2"></i>
+                            More case studies coming soon as we work with more amazing clients!
+                        </div>
+                        <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast"></button>
+                    </div>
+                `;
+                document.getElementById('toastContainer').appendChild(toast);
+                const bsToast = new bootstrap.Toast(toast);
+                bsToast.show();
+            });
+        }
+    }
+
+    openCaseStudy(studyId) {
+        const study = this.caseStudies[studyId];
+        if (!study) return;
+
+        const modalContent = document.getElementById('caseStudyModalContent');
+        modalContent.innerHTML = this.generateCaseStudyHTML(study);
+        
+        const modal = new bootstrap.Modal(document.getElementById('caseStudyModal'));
+        modal.show();
+    }
+    
+
+    generateCaseStudyHTML(study) {
+        return `
+            <div class="case-study-detail">
+                <!-- Header Section -->
+                <div class="row mb-4">
+                    <div class="col-md-8">
+                        <h4 class="text-light mb-2">${study.title}</h4>
+                        <div class="d-flex flex-wrap gap-2 mb-3">
+                            <span class="badge badge-admin">${study.category}</span>
+                            <span class="badge badge-admin">${study.industry}</span>
+                            <span class="badge badge-admin">${study.duration}</span>
+                        </div>
+                    </div>
+                    <div class="col-md-4 text-md-end">
+                        <div class="client-info">
+                            <h6 class="text-orange mb-1">Client</h6>
+                            <p class="text-light mb-0">${study.client}</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Results Overview -->
+                <div class="results-grid mb-4">
+                    ${Object.entries(study.results).map(([key, value]) => `
+                        <div class="result-item">
+                            <span class="result-number">${value}</span>
+                            <span class="stat-label">${this.formatResultLabel(key)}</span>
+                        </div>
+                    `).join('')}
+                </div>
+
+                <!-- Challenge & Solution -->
+                <div class="row mb-4">
+                    <div class="col-md-6">
+                        <div class="challenge-section">
+                            <h6 class="text-orange mb-3">
+                                <i class="fas fa-exclamation-triangle me-2"></i>The Challenge
+                            </h6>
+                            <div class="rounded p-3" style="background: var(--secondary-black);">
+                                <p class="mb-0 text-light">${study.challenge}</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="solution-section">
+                            <h6 class="text-orange mb-3">
+                                <i class="fas fa-lightbulb me-2"></i>Our Solution
+                            </h6>
+                            <div class="rounded p-3" style="background: var(--secondary-black);">
+                                <p class="mb-0 text-light">${study.solution}</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Approach -->
+                <div class="approach-section mb-4">
+                    <h6 class="text-orange mb-3">
+                        <i class="fas fa-road me-2"></i>Our Approach
+                    </h6>
+                    <div class="row">
+                        ${study.approach.map((phase, index) => `
+                            <div class="col-md-6 mb-3">
+                                <div class="approach-phase rounded p-3" style="background: var(--secondary-black);">
+                                    <div class="d-flex align-items-center mb-2">
+                                        <span class="badge bg-orange me-2">${index + 1}</span>
+                                        <h6 class="mb-0 text-light">${phase.phase}</h6>
+                                    </div>
+                                    <p class="mb-0 text-muted small">${phase.description}</p>
+                                </div>
+                            </div>
+                        `).join('')}
+                    </div>
+                </div>
+
+                <!-- Technologies & Testimonial -->
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="technologies-section">
+                            <h6 class="text-orange mb-3">
+                                <i class="fas fa-tools me-2"></i>Technologies Used
+                            </h6>
+                            <div class="d-flex flex-wrap gap-2">
+                                ${study.technologies.map(tech => `
+                                    <span class="badge badge-admin">${tech}</span>
+                                `).join('')}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="testimonial-section">
+                            <h6 class="text-orange mb-3">
+                                <i class="fas fa-quote-left me-2"></i>Client Testimonial
+                            </h6>
+                            <div class="rounded p-3" style="background: var(--secondary-black); border-left: 4px solid var(--accent-orange);">
+                                <p class="text-light mb-3">"${study.testimonial.text}"</p>
+                                <div class="d-flex align-items-center">
+                                    <div class="client-avatar-small me-3">
+                                        <i class="fas fa-user-circle text-orange" style="font-size: 2rem;"></i>
+                                    </div>
+                                    <div>
+                                        <h6 class="mb-0 text-light">${study.testimonial.author}</h6>
+                                        <p class="mb-0 text-muted small">${study.testimonial.role}</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        `;
+    }
+
+    formatResultLabel(key) {
+        const labels = {
+            quality: "Quality",
+            delivery: "Delivery",
+            impact: "Impact", 
+            satisfaction: "Satisfaction",
+            engagement: "Engagement",
+            reach: "Reach",
+            sales: "Sales Impact",
+            branding: "Branding",
+            strategy: "Strategy",
+            ideas: "Content Ideas",
+            growth: "Growth"
+        };
+        return labels[key] || key;
+    }
+}
+
+
+// Initialize Case Study Manager
+let caseStudyManager;
+
+document.addEventListener('DOMContentLoaded', function() {
+    caseStudyManager = new CaseStudyManager();
+});
+</script>
+
+<style>
+/* Case Study Detail Styles */
+.case-study-detail {
+    color: var(--text-light);
+}
+
+.results-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 1rem;
+    margin: 2rem 0;
+}
+
+.result-item {
+    text-align: center;
+    padding: 1.5rem;
+    background: rgba(255, 107, 53, 0.1);
+    border-radius: 10px;
+    border: 1px solid rgba(255, 107, 53, 0.2);
+}
+
+.result-number {
+    font-size: 2rem;
+    font-weight: 800;
+    color: var(--accent-orange);
+    display: block;
+    line-height: 1;
+}
+
+.stat-label {
+    font-size: 0.8rem;
+    color: var(--text-gray);
+    text-transform: uppercase;
+    margin-top: 0.5rem;
+    display: block;
+}
+
+.approach-phase {
+    transition: all 0.3s ease;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.approach-phase:hover {
+    border-color: var(--accent-orange);
+    transform: translateY(-2px);
+}
+
+.client-avatar-small {
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.testimonial-header {
+    text-align: center;
+    border-bottom: 1px solid rgba(255, 107, 53, 0.2);
+    padding-bottom: 1rem;
+    margin-bottom: 1rem;
+}
+
+.client-logo {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.testimonial-text {
+    font-style: italic;
+    line-height: 1.6;
+}
+
+.star-rating {
+    text-align: center;
+}
+
+/* Mobile Responsive */
+@media (max-width: 768px) {
+    .results-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 0.75rem;
+    }
+    
+    .result-item {
+        padding: 1rem;
+    }
+    
+    .result-number {
+        font-size: 1.5rem;
+    }
+}
+/* Add to your main.css file */
+.toast {
+    background: var(--accent-orange) !important;
+    border: none !important;
+    border-radius: 12px !important;
+    box-shadow: 0 10px 30px rgba(255, 107, 53, 0.3) !important;
+    backdrop-filter: blur(10px);
+    margin-bottom: 1rem;
+    max-width: 400px;
+}
+
+.toast.show {
+    opacity: 1 !important;
+}
+
+.toast.hide {
+    opacity: 0 !important;
+}
+
+.toast-body {
+    color: white !important;
+    font-weight: 500;
+    padding: 1rem 1.25rem !important;
+    font-size: 0.95rem;
+}
+
+.toast .btn-close {
+    opacity: 0.8 !important;
+    filter: invert(1) !important;
+    padding: 0.75rem !important;
+}
+
+.toast .btn-close:hover {
+    opacity: 1 !important;
+    transform: scale(1.1);
+}
+
+.toast .fa-info-circle {
+    font-size: 1.1rem;
+}
+
+/* Animation for toast entrance */
+@keyframes toastSlideIn {
+    from {
+        transform: translateX(100%);
+        opacity: 0;
+    }
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+@keyframes toastSlideOut {
+    from {
+        transform: translateX(0);
+        opacity: 1;
+    }
+    to {
+        transform: translateX(100%);
+        opacity: 0;
+    }
+}
+
+.toast.show {
+    animation: toastSlideIn 0.3s ease-out;
+}
+
+.toast.hiding {
+    animation: toastSlideOut 0.3s ease-in;
+}
+
+/* Toast container positioning */
+.toast-container {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    z-index: 9999;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+    .toast-container {
+        top: 10px;
+        right: 10px;
+        left: 10px;
+        align-items: stretch;
+    }
+    
+    .toast {
+        max-width: none !important;
+        width: auto !important;
+    }
+    
+    .toast-body {
+        font-size: 0.9rem;
+        padding: 0.875rem 1rem !important;
+    }
+}
+
+/* Success variant (if you want to use different types later) */
+.toast.bg-success {
+    background: linear-gradient(135deg, #28a745, #20c997) !important;
+    box-shadow: 0 10px 30px rgba(40, 167, 69, 0.3) !important;
+}
+
+/* Warning variant */
+.toast.bg-warning {
+    background: linear-gradient(135deg, #ffc107, #fd7e14) !important;
+    box-shadow: 0 10px 30px rgba(255, 193, 7, 0.3) !important;
+    color: #212529 !important;
+}
+
+.toast.bg-warning .toast-body {
+    color: #212529 !important;
+}
+
+.toast.bg-warning .btn-close {
+    filter: none !important;
+}
+
+/* Info variant */
+.toast.bg-info {
+    background: linear-gradient(135deg, #17a2b8, #6f42c1) !important;
+    box-shadow: 0 10px 30px rgba(23, 162, 184, 0.3) !important;
+}
+
+/* Hover effects */
+.toast:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 15px 40px rgba(255, 107, 53, 0.4) !important;
+    transition: all 0.3s ease;
+}
+/* Update the case study stats to display inline */
+.case-study-stats {
+    justify-content: center;
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 1rem;
+    flex-wrap: wrap;
+}
+
+.stat-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    padding: 0.75rem;
+    min-width: 80px;
+}
+
+.stat-number {
+    font-size: 2rem;
+    font-weight: 800;
+    color: var(--accent-orange);
+    line-height: 1;
+    margin-bottom: 0.25rem;
+}
+
+.stat-label {
+    font-size: 0.7rem;
+    color: var(--text-gray);
+    text-transform: uppercase;
+    line-height: 1.2;
+    display: block;
+}
+.case-study-tags {
+    margin-bottom: 1rem;
+    text-align: center;
+}
+/* For mobile responsiveness */
+@media (max-width: 768px) {
+    .case-study-stats {
+        gap: 0.5rem;
+    }
+    
+    .stat-item {
+        padding: 0.5rem;
+        min-width: 70px;
+    }
+    
+    .stat-label {
+        font-size: 0.65rem;
+    }
+}
+</style>
+{% endblock %}

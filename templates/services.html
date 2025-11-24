@@ -1,0 +1,332 @@
+{% extends "base.html" %}
+
+{% block title %}Our Services - Shout OTB{% endblock %}
+
+{% block content %}
+<!-- Services Hero Section -->
+<section class="hero-section"
+         style="background: url(&quot;{{ url_for('static', filename='images/hero bg services.png') }}&quot;) center/cover no-repeat;
+                position: relative;
+                padding: 120px 0;
+                border-radius: 20px;
+                overflow: hidden;">
+
+    <div class="container position-relative" style="z-index: 2;">
+        <div class="row align-items-center text-center text-lg-start justify-content-center">
+            <div class="col-lg-8">
+                <div class="hero-content fade-in-element">  <!-- ANIMATION ON CONTAINER -->
+                    <h1 class="hero-title">Our Services</h1>
+                    <p class="hero-subtitle text-light" style="font-size: 1.25rem;">
+                        Comprehensive digital solutions to transform your brand and drive measurable growth
+                    </p>
+                    <a href="{{ url_for('contact') }}" class="btn btn-custom btn-magnetic mt-3">
+                        Get Started
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Main Services Section -->
+<section class="py-5">
+    <div class="container">
+        <div class="row mb-5">
+            <div class="col-12 text-center">
+                <h2 class="section-title mb-3 fade-in-element">Services That Turn Your Business Into A Growth Machine</h2>
+                <p class="section-subtitle fade-in-element delay-1">Each service is designed to deliver specific, measurable results</p>
+            </div>
+        </div>
+
+        <div class="row">
+            <!-- Service 1 -->
+            <div class="col-lg-4 col-md-6 mb-4">
+                <div class="service-card fade-in-element delay-1">
+                    <div class="service-number">01</div>
+                    <h3 class="service-title">Creative & Content</h3>
+                    <p class="service-description">We don't just create content, we craft experiences that make your brand unforgettable.</p>
+                    <ul class="service-list">
+                        <li>Custom graphic design</li>
+                        <li>Video editing & motion graphics</li>
+                        <li>Strategic copywriting</li>
+                        <li>Brand identity development</li>
+                    </ul>
+                    <div class="service-actions">
+                        <a href="{{ url_for('service_detail', service_id='creative-content') }}" class="btn btn-outline-custom">Explore Service</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Service 2 -->
+            <div class="col-lg-4 col-md-6 mb-4">
+                <div class="service-card fade-in-element delay-2">
+                    <div class="service-number">02</div>
+                    <h3 class="service-title">Social & Community Growth</h3>
+                    <p class="service-description">Social media is the face of your brand & we make sure it shines.</p>
+                    <ul class="service-list">
+                        <li>Social media management</li>
+                        <li>Influencer partnership programs</li>
+                        <li>Community engagement strategies</li>
+                        <li>Performance tracking</li>
+                    </ul>
+                    <div class="service-actions">
+                        <a href="{{ url_for('service_detail', service_id='social-growth') }}" class="btn btn-outline-custom">Explore Service</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Service 3 -->
+            <div class="col-lg-4 col-md-6 mb-4">
+                <div class="service-card fade-in-element delay-3">
+                    <div class="service-number">03</div>
+                    <h3 class="service-title">Performance & Growth Marketing</h3>
+                    <p class="service-description">Where every click counts and every conversion matters.</p>
+                    <ul class="service-list">
+                        <li>Paid advertising management</li>
+                        <li>Conversion rate optimization</li>
+                        <li>Advanced analytics & tracking</li>
+                        <li>ROI-focused strategy</li>
+                    </ul>
+                    <div class="service-actions">
+                        <a href="{{ url_for('service_detail', service_id='performance-marketing') }}" class="btn btn-outline-custom">Explore Service</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Service 4 -->
+            <div class="col-lg-4 col-md-6 mb-4">
+                <div class="service-card fade-in-element delay-1">
+                    <div class="service-number">04</div>
+                    <h3 class="service-title">AI & Future-Ready Solutions</h3>
+                    <p class="service-description">AI tools with human touch for tomorrow's challenges.</p>
+                    <ul class="service-list">
+                        <li>AI automations & workflows</li>
+                        <li>AI search optimization</li>
+                        <li>Digital content protection</li>
+                        <li>AI-based content creation</li>
+                    </ul>
+                    <div class="service-actions">
+                        <a href="{{ url_for('service_detail', service_id='ai-solutions') }}" class="btn btn-outline-custom">Explore Service</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Service 5 -->
+            <div class="col-lg-4 col-md-6 mb-4">
+                <div class="service-card fade-in-element delay-2">
+                    <div class="service-number">05</div>
+                    <h3 class="service-title">Web, App & Custom Development</h3>
+                    <p class="service-description">Websites that work as hard as you do.</p>
+                    <ul class="service-list">
+                        <li>Custom web application development</li>
+                        <li>Mobile app development</li>
+                        <li>E-commerce platform development</li>
+                        <li>API development & integration</li>
+                    </ul>
+                    <div class="service-actions">
+                        <a href="{{ url_for('service_detail', service_id='web-development') }}" class="btn btn-outline-custom">Explore Service</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Service 6 -->
+            <div class="col-lg-4 col-md-6 mb-4">
+                <div class="service-card fade-in-element delay-3">
+                    <div class="service-number">06</div>
+                    <h3 class="service-title">E-commerce & Retail Media</h3>
+                    <p class="service-description">Retail ads that deliver real sales and measurable ROI.</p>
+                    <ul class="service-list">
+                        <li>E-commerce marketplace management</li>
+                        <li>Retail media advertising</li>
+                        <li>Catalog optimization</li>
+                        <li>Multi-platform campaign management</li>
+                    </ul>
+                    <div class="service-actions">
+                        <a href="{{ url_for('service_detail', service_id='ecommerce') }}" class="btn btn-outline-custom">Explore Service</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Service 7 -->
+            <div class="col-lg-4 col-md-6 mb-4">
+                <div class="service-card fade-in-element delay-1">
+                    <div class="service-number">07</div>
+                    <h3 class="service-title">WhatsApp Marketing</h3>
+                    <p class="service-description">The fastest way to your customers' hearts.</p>
+                    <ul class="service-list">
+                        <li>Automated WhatsApp chatbots</li>
+                        <li>Click-to-chat ad campaigns</li>
+                        <li>Broadcast messaging systems</li>
+                        <li>CRM integration</li>
+                    </ul>
+                    <div class="service-actions">
+                        <a href="{{ url_for('service_detail', service_id='whatsapp-marketing') }}" class="btn btn-outline-custom">Explore Service</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Service 8 -->
+            <div class="col-lg-4 col-md-6 mb-4">
+                <div class="service-card fade-in-element delay-2">
+                    <div class="service-number">08</div>
+                    <h3 class="service-title">UI/UX & Branding Design</h3>
+                    <p class="service-description">Designing experiences, not just screens.</p>
+                    <ul class="service-list">
+                        <li>Website & app UI/UX design</li>
+                        <li>Wireframing & prototyping</li>
+                        <li>Branding integration</li>
+                        <li>Design system creation</li>
+                    </ul>
+                    <div class="service-actions">
+                        <a href="{{ url_for('service_detail', service_id='design') }}" class="btn btn-outline-custom">Explore Service</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Service 9 -->
+            <div class="col-lg-4 col-md-6 mb-4">
+                <div class="service-card fade-in-element delay-3">
+                    <div class="service-number">09</div>
+                    <h3 class="service-title">Video Editing & Animation</h3>
+                    <p class="service-description">Story that moves your audience.</p>
+                    <ul class="service-list">
+                        <li>Corporate video production</li>
+                        <li>2D/3D animation</li>
+                        <li>Social media reels & shorts</li>
+                        <li>Logo animations</li>
+                    </ul>
+                    <div class="service-actions">
+                        <a href="{{ url_for('service_detail', service_id='video-editing') }}" class="btn btn-outline-custom">Explore Service</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Service 10 -->
+            <div class="col-lg-4 col-md-6 mb-4">
+                <div class="service-card fade-in-element delay-1">
+                    <div class="service-number">10</div>
+                    <h3 class="service-title">Graphic Design</h3>
+                    <p class="service-description">Designs so bold that your brand never whispers, it SHOUTS.</p>
+                    <ul class="service-list">
+                        <li>Logo & brand identity</li>
+                        <li>Social media graphics</li>
+                        <li>Marketing collateral</li>
+                        <li>Custom illustrations</li>
+                    </ul>
+                    <div class="service-actions">
+                        <a href="{{ url_for('service_detail', service_id='graphic-design') }}" class="btn btn-outline-custom">Explore Service</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Service 11 -->
+            <div class="col-lg-4 col-md-6 mb-4">
+                <div class="service-card fade-in-element delay-2">
+                    <div class="service-number">11</div>
+                    <h3 class="service-title">Influencer Marketing & PR</h3>
+                    <p class="service-description">Collaborations that click and PR that puts you on the map.</p>
+                    <ul class="service-list">
+                        <li>Micro & nano influencer partnerships</li>
+                        <li>PR placements & media features</li>
+                        <li>Influencer campaign management</li>
+                        <li>Media relationship building</li>
+                    </ul>
+                    <div class="service-actions">
+                        <a href="{{ url_for('service_detail', service_id='influencer-marketing') }}" class="btn btn-outline-custom">Explore Service</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Service 12 -->
+            <div class="col-lg-4 col-md-6 mb-4">
+                <div class="service-card fade-in-element delay-3">
+                    <div class="service-number">12</div>
+                    <h3 class="service-title">CRO & Analytics Hub</h3>
+                    <p class="service-description">Conversions aren't luck—they're strategy.</p>
+                    <ul class="service-list">
+                        <li>Funnel optimization & analysis</li>
+                        <li>A/B & multivariate testing</li>
+                        <li>Real-time performance dashboards</li>
+                        <li>Custom attribution modeling</li>
+                    </ul>
+                    <div class="service-actions">
+                        <a href="{{ url_for('service_detail', service_id='cro-analytics') }}" class="btn btn-outline-custom">Explore Service</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Specialized Solutions Section - Now with only 4 services -->
+        <div class="row mt-5">
+            <div class="col-12 text-center mb-4">
+                <h3 class="section-title fade-in-element">Specialized & Niche Solutions</h3>
+                <p class="section-subtitle fade-in-element delay-1">Advanced services for specific business needs</p>
+            </div>
+
+            <!-- Service 13 -->
+            <div class="col-lg-3 col-md-6 mb-4">
+                <div class="service-card text-center h-100 fade-in-element delay-1">
+                    <div class="service-number">13</div>
+                    <h5 class="service-title">UGC & Creator Commerce</h5>
+                    <p class="service-description">Real voices, real growth. Turn customers into brand creators.</p>
+                    <div class="service-actions">
+                        <a href="{{ url_for('service_detail', service_id='ugc-creator') }}" class="btn btn-sm btn-outline-custom">Learn More</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Service 14 -->
+            <div class="col-lg-3 col-md-6 mb-4">
+                <div class="service-card text-center h-100 fade-in-element delay-2">
+                    <div class="service-number">14</div>
+                    <h5 class="service-title">AI Content Creation</h5>
+                    <p class="service-description">Future-ready strategies combining human creativity with AI efficiency.</p>
+                    <div class="service-actions">
+                        <a href="{{ url_for('service_detail', service_id='ai-content') }}" class="btn btn-sm btn-outline-custom">Learn More</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Service 15 -->
+            <div class="col-lg-3 col-md-6 mb-4">
+                <div class="service-card text-center h-100 fade-in-element delay-3">
+                    <div class="service-number">15</div>
+                    <h5 class="service-title">AI Automations</h5>
+                    <p class="service-description">AI that works while you sleep. Integrate, automate, dominate.</p>
+                    <div class="service-actions">
+                        <a href="{{ url_for('service_detail', service_id='ai-automations') }}" class="btn btn-sm btn-outline-custom">Learn More</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Service 16 -->
+            <div class="col-lg-3 col-md-6 mb-4">
+                <div class="service-card text-center h-100 fade-in-element delay-4">
+                    <div class="service-number">16</div>
+                    <h5 class="service-title">Content Protection</h5>
+                    <p class="service-description">Your invisible shield against AI misuse.</p>
+                    <div class="service-actions">
+                        <a href="{{ url_for('service_detail', service_id='content-protection') }}" class="btn btn-sm btn-outline-custom">Learn More</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- CTA Section -->
+<section class="py-5 fade-in-element" style="background: var(--secondary-black);">
+    <div class="container">
+        <div class="row">
+            <div class="col-12 text-center">
+                <h2 class="mb-4 fade-in-element delay-1">Ready to Transform Your Digital Presence?</h2>
+                <p class="mb-4 fade-in-element delay-2">Let's discuss how our services can drive growth for your business</p>
+                <div class="fade-in-element delay-3">
+                    <a href="{{ url_for('contact') }}" class="btn btn-custom btn-magnetic fade-in-element delay-2 me-0 me-md-3 mb-3 mb-md-0">Get Started</a>
+                    <a href="{{ url_for('portfolio') }}" class="btn btn-outline-custom btn-magnetic fade-in-element delay-3">View Our Work</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

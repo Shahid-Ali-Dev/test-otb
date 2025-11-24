@@ -1,0 +1,222 @@
+{% extends "base.html" %}
+
+{% block title %}{{ service_data.title }} - Shout OTB{% endblock %}
+
+{% block content %}
+<section class="hero-section" style="min-height: 40vh;">
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-lg-6">
+                <nav aria-label="breadcrumb" class="fade-in-element">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="{{ url_for('index') }}" class="text-muted">Home</a></li>
+                        <li class="breadcrumb-item"><a href="{{ url_for('portfolio') }}" class="text-muted">Portfolio</a></li>
+                        <li class="breadcrumb-item"><a href="{{ url_for('services') }}" class="text-muted">Services</a></li>
+                    </ol>
+                </nav>
+                <h1 class="hero-title fade-in-element delay-1">{{ service_data.title }}</h1>
+                <p class="hero-subtitle fade-in-element delay-2">{{ service_data.tagline }}</p>
+            </div>
+            <div class="col-lg-6 text-center">
+                <!-- Clean Dynamic Animation Video Container -->
+                <div class="fade-in-element delay-3 service-animation-container" data-service="{{ service_data.id }}">
+                    <video 
+                        autoplay 
+                        muted 
+                        loop 
+                        playsinline
+                        class="service-animation-video"
+                        style="max-width: 100%; height: auto; border-radius: 12px;">
+                        
+                        <!-- Single Cloudinary source - it will handle format automatically -->
+                        <source src="{{ service_data.video_url }}" type="video/webm">
+                        
+                        <!-- Fallback for browsers that don't support WebM -->
+                        <source src="{{ service_data.video_url|replace('.webm','.mp4') }}" type="video/mp4">
+                        
+                        <!-- Final fallback -->
+                        Your browser does not support the video tag.
+                    </video>
+                    
+                    <!-- Loading spinner -->
+                    <div class="video-loading" style="display: none;">
+                        <div class="spinner-border text-orange" role="status">
+                            <span class="visually-hidden">Loading animation...</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- Service Details Section -->
+<section class="py-5">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8">
+                <div class="service-detail-content">
+                    <h2 class="mb-4 fade-in-element">About This Service</h2>
+                    <p class="lead fade-in-element delay-1">{{ service_data.description }}</p>
+                    
+                    <div class="row mt-5">
+                        <div class="col-md-6">
+                            <h4 class="mb-3 fade-in-element delay-1">What We Deliver</h4>
+                            <ul class="service-list">
+                                {% for feature in service_data.features %}
+                                <li class="fade-in-element delay-{{ loop.index + 1 }}">{{ feature }}</li>
+                                {% endfor %}
+                            </ul>
+                        </div>
+                        <div class="col-md-6">
+                            <h4 class="mb-3 fade-in-element delay-2">Key Benefits</h4>
+                            <ul class="service-list">
+                                {% for benefit in service_data.benefits %}
+                                <li class="fade-in-element delay-{{ loop.index + 2 }}">{{ benefit }}</li>
+                                {% endfor %}
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- Process Section -->
+                    <div class="mt-5">
+                        <h4 class="mb-4 fade-in-element">Our Process</h4>
+                        <div class="row">
+                            {% for step in service_data.process %}
+                            <div class="col-lg-3 col-md-6 mb-3">
+                                <div class="process-step text-center p-3 fade-in-element delay-{{ loop.index }}">
+                                    <div class="step-number mb-3" style="width: 40px; height: 40px; background: var(--accent-orange); color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto;">
+                                        {{ loop.index }}
+                                    </div>
+                                    <h6 class="mb-2">{{ step.title }}</h6>
+                                    <p class="text-muted small">{{ step.description }}</p>
+                                </div>
+                            </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-4">
+                <div class="service-sidebar">
+                    <div class="service-card fade-in-element delay-2">
+                        <h4 class="mb-3">Service Details</h4>
+                        
+                        <div class="mb-3">
+                            <h6 class="text-orange">Delivery Time</h6>
+                            <p class="text-muted">{{ service_data.delivery_time }}</p>
+                        </div>
+                        
+                        <div class="mb-3">
+                            <h6 class="text-orange">Starting From</h6>
+                            <p class="text-muted">{{ service_data.starting_price }}</p>
+                        </div>
+                        
+                        <div class="mb-3">
+                            <h6 class="text-orange">What's Included</h6>
+                            <ul class="service-list">
+                                {% for item in service_data.included %}
+                                <li>{{ item }}</li>
+                                {% endfor %}
+                            </ul>
+                        </div>
+                        
+                        <div class="d-grid gap-2">
+                            <a href="{{ url_for('contact') }}?service={{ service_data.id }}" class="btn btn-custom fade-in-element delay-3">Get Quote</a>
+                            <a href="{{ url_for('contact') }}" class="btn btn-outline-custom fade-in-element delay-4">Schedule Consultation</a>
+                        </div>
+                    </div>
+
+                    <!-- Related Services -->
+                    <div class="mt-4">
+                        <h5 class="mb-3 fade-in-element delay-3">Related Services</h5>
+                        {% for related_service in service_data.related_services %}
+                        <div class="mb-2">
+                            <a href="{{ url_for('service_detail', service_id=related_service.id) }}" class="text-decoration-none">
+                                <div class="d-flex align-items-center p-2 service-card-hover fade-in-element delay-{{ loop.index + 3 }}">
+                                    <i class="fas {{ related_service.icon }} text-orange me-3"></i>
+                                    <span>{{ related_service.title }}</span>
+                                </div>
+                            </a>
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Case Studies/Portfolio Preview -->
+<section class="py-5" style="background: var(--secondary-black);">
+    <div class="container">
+        <div class="row">
+            <div class="col-12 text-center mb-4">
+                <h3 class="fade-in-element">Success Stories</h3>
+                <p class="text-muted fade-in-element delay-1">See how we've delivered results with this service</p>
+            </div>
+        </div>
+        <div class="row">
+            <!-- Case study cards would go here -->
+            <div class="col-md-4 mb-4">
+                <div class="case-study-card text-center p-4 fade-in-element delay-1">
+                    <div class="mb-3">
+                        <i class="fas fa-chart-line text-orange" style="font-size: 2rem;"></i>
+                    </div>
+                    <h5>Increased Engagement</h5>
+                    <p class="text-muted small">Client saw 300% growth in social media engagement</p>
+                </div>
+            </div>
+            <div class="col-md-4 mb-4">
+                <div class="case-study-card text-center p-4 fade-in-element delay-2">
+                    <div class="mb-3">
+                        <i class="fas fa-shopping-cart text-orange" style="font-size: 2rem;"></i>
+                    </div>
+                    <h5>Boosted Sales</h5>
+                    <p class="text-muted small">E-commerce client achieved 150% ROI in 3 months</p>
+                </div>
+            </div>
+            <div class="col-md-4 mb-4">
+                <div class="case-study-card text-center p-4 fade-in-element delay-3">
+                    <div class="mb-3">
+                        <i class="fas fa-users text-orange" style="font-size: 2rem;"></i>
+                    </div>
+                    <h5>Community Growth</h5>
+                    <p class="text-muted small">Built an engaged community of 50K+ followers</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- FAQ Section -->
+<section class="py-5">
+    <div class="container">
+        <div class="row">
+            <div class="col-12 text-center mb-4">
+                <h3 class="fade-in-element">Frequently Asked Questions</h3>
+            </div>
+        </div>
+        <div class="row justify-content-center">
+            <div class="col-lg-8">
+                <div class="accordion" id="serviceFAQ">
+                    {% for faq in service_data.faqs %}
+                    <div class="accordion-item mb-3 fade-in-element delay-{{ loop.index }}" style="background: var(--secondary-black); border: 1px solid rgba(255,107,53,0.1);">
+                        <h2 class="accordion-header">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq{{ loop.index }}" style="background: var(--secondary-black); color: var(--text-light);">
+                                {{ faq.question }}
+                            </button>
+                        </h2>
+                        <div id="faq{{ loop.index }}" class="accordion-collapse collapse" data-bs-parent="#serviceFAQ">
+                            <div class="accordion-body">
+                                {{ faq.answer }}
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

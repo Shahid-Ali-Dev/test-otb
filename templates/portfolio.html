@@ -1,0 +1,158 @@
+{% extends "base.html" %}
+
+{% block title %}Our Portfolio - Shout OTB{% endblock %}
+
+{% block content %}
+<!-- Portfolio Hero Section -->
+<section class="hero-section"
+         style="background-image: 
+                    url('{{ url_for('static', filename='images/hero bg portfolio org.avif') }}'),
+                    url('{{ url_for('static', filename='images/hero bg portfolio org.webp') }}'),
+                    url('{{ url_for('static', filename='images/hero bg portfolio org.png') }}');
+                background-position: center;
+                background-size: cover;
+                background-repeat: no-repeat;
+                position: relative;
+                padding: 120px 0;
+                border-radius: 20px;
+                overflow: hidden;">
+
+    <div class="container position-relative" style="z-index: 2;">
+        <div class="row align-items-center text-center text-lg-start justify-content-center">
+            <div class="col-lg-8">
+                <div class="hero-content fade-in-element">
+                    <h1 class="hero-title">Our Portfolio</h1>
+                    <p class="hero-subtitle text-light" style="font-size: 1.25rem;">
+                        See how we've helped brands achieve remarkable results through our digital solutions
+                    </p>
+                    <div class="hero-buttons">
+                        <a href="{{ url_for('contact') }}" class="btn btn-custom btn-magnetic mt-3 me-0 me-md-3 mb-2 mb-md-0">
+                            Start Your Project
+                        </a>
+                        <a href="{{ url_for('case_studies') }}" class="btn btn-outline-custom btn-magnetic mt-3">
+                            <i class="fas fa-eye me-2"></i> View Case Studies
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Portfolio Filter -->
+<section class="py-4" style="background: var(--secondary-black);">
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-12">
+        <div class="portfolio-filter-container text-center">
+          
+          <!-- Unified btn-group for JS -->
+          <div class="btn-group flex-wrap justify-content-center d-flex" role="group">
+            
+            <button type="button" class="btn btn-outline-custom active fade-in-element delay-1" data-filter="all">All Work</button>
+            <button type="button" class="btn btn-outline-custom fade-in-element delay-2" data-filter="creative">Creative & Content</button>
+            <button type="button" class="btn btn-outline-custom fade-in-element delay-3" data-filter="social">Social</button>
+            <button type="button" class="btn btn-outline-custom fade-in-element delay-4" data-filter="animation">Animation</button>
+            <button type="button" class="btn btn-outline-custom fade-in-element delay-5" data-filter="development">Development</button>
+            <button type="button" class="btn btn-outline-custom fade-in-element delay-6" data-filter="ai">AI</button>
+
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- Portfolio Grid -->
+<section class="py-5">
+    <div class="container">
+        <div class="portfolio-container">
+            <div class="portfolio-grid" id="portfolioGrid">
+                <!-- Portfolio items will be loaded here -->
+            </div>
+        </div>
+
+        <!-- Load More Button -->
+        <div class="text-center mt-5">
+            <button class="btn btn-outline-custom btn-magnetic" id="loadMore">
+                <i class="fas fa-plus me-2"></i>Load More Projects
+            </button>
+        </div>
+    </div>
+</section>
+
+<!-- Video Modal -->
+<div class="video-modal" id="videoModal">
+    <button class="close-modal">&times;</button> <!-- Move outside content -->
+    <div class="video-modal-content">
+        <div id="modalVideoContainer"></div>
+    </div>
+</div>
+
+<!-- Stats Section -->
+<section class="py-5" style="background: var(--secondary-black);">
+    <div class="container">
+        <div class="row text-center">
+            <div class="col-lg-3 col-md-6 mb-4">
+                <div class="stat-item fade-in-element">
+                    <h2 class="display-4 text-orange mb-2" data-count="10">0</h2>
+                    <p class="text-muted">Projects Completed</p>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6 mb-4">
+                <div class="stat-item fade-in-element">
+                    <h2 class="display-4 text-orange mb-2" data-count="5">0</h2>
+                    <p class="text-muted">Client Satisfaction</p>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6 mb-4">
+                <div class="stat-item fade-in-element">
+                    <h2 class="display-4 text-orange mb-2" data-count="1">0</h2>
+                    <p class="text-muted">Industries Served</p>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6 mb-4">
+                <div class="stat-item fade-in-element">
+                    <h2 class="display-4 text-orange mb-2" data-count="10">0</h2>
+                    <p class="text-muted">Years of Marketing Experience</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- CTA Section -->
+<section class="py-5">
+    <div class="container">
+        <div class="row">
+            <div class="col-12 text-center">
+                <h2 class="mb-4 fade-in-element">Ready to Create Something Amazing Together?</h2>
+                <p class="mb-4 fade-in-element delay-1">Let's discuss how we can bring your vision to life</p>
+                <div class="cta-buttons">
+                    <a href="{{ url_for('contact') }}" class="btn btn-custom btn-magnetic fade-in-element delay-2 me-0 me-md-3 mb-3 mb-md-0">
+                        Start Your Project
+                    </a>
+                    <a href="{{ url_for('services') }}" class="btn btn-outline-custom btn-magnetic fade-in-element delay-3">
+                        Explore Services
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Portfolio Data Script -->
+<script id="portfolio-data" type="application/json">
+  {{ portfolio_items | tojson }}
+</script>
+
+<script>
+  window.portfolioItems = JSON.parse(
+    document.getElementById("portfolio-data").textContent
+  );
+</script>
+
+
+{% endblock %}

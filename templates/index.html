@@ -1,0 +1,420 @@
+{% extends "base.html" %}
+
+{% block title %}Home - Shout OTB{% endblock %}
+
+{% block content %}
+<!-- Hero Section -->
+<section class="hero-section"
+         style="background-image: 
+                    url('{{ url_for('static', filename='images/hero bg home.avif') }}'),
+                    url('{{ url_for('static', filename='images/hero bg home.webp') }}'),
+                    url('{{ url_for('static', filename='images/hero bg home.png') }}');
+                background-position: center;
+                background-size: cover;
+                background-repeat: no-repeat;
+                position: relative;
+                padding: 120px 0;
+                border-radius: 20px;
+                overflow: hidden;">
+
+
+    <div class="container position-relative" style="z-index: 2;">
+        <div class="row align-items-center text-center text-lg-start justify-content-center">
+            <div class="col-lg-8">
+                <div class="hero-content fade-in-element">
+                   
+                    <img src="{{ url_for('static', filename='images/Asset 14.png') }}" 
+                         alt="SHOUT OTB Logo"
+                         style="max-height: 160px; margin-bottom: 25px; object-fit: contain;">
+                    
+                    <p class="hero-subtitle text-light" style="font-size: 1.25rem;">
+                        We transform brands with cutting-edge digital solutions.
+                    </p>
+
+                    <a href="{{ url_for('services') }}" class="btn btn-custom btn-magnetic mt-3">
+                        Explore Our Services
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+    <!-- The Shout Code Section: title above box -->
+<section class="py-5">
+  <div class="container">
+    <!-- Title -->
+    <div class="row mb-4 fade-in-element">
+      <div class="col-12 text-center">
+        <h2 style="color: var(--text-light); margin-bottom: 1rem;">The Shout Code</h2>
+      </div>
+    </div>
+
+    <!-- All Quotes (stacked full-width) -->
+    <div class="row g-4">
+
+      <div class="col-12">
+        <div class="quote-box fade-in-element">
+          <div class="quote-content">
+            <h4 class="quote-title">Curiosity Over Comfort</h4>
+            <div class="quote-text">
+              <p>We don't follow the obvious route — we chase the ones no one's mapped yet. Breakthroughs live where others don't dare to look.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-12">
+        <div class="quote-box fade-in-element delay-2">
+          <div class="quote-content">
+            <h4 class="quote-title">Strategy With Edge</h4>
+            <div class="quote-text">
+              <p>We don't gamble. Every bold move is backed by insight, testing, and a deep understanding of what actually works.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-12">
+        <div class="quote-box fade-in-element delay-3">
+          <div class="quote-content">
+            <h4 class="quote-title">Human-First Automation</h4>
+            <div class="quote-text">
+              <p>We use tech to remove friction, not imagination. Machines handle the repeatable — people craft the remarkable.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-12">
+        <div class="quote-box fade-in-element delay-4">
+          <div class="quote-content">
+            <h4 class="quote-title">Research at Light Speed</h4>
+            <div class="quote-text">
+              <p>We turn deep research into fast action — because the right opportunities don't wait.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-12">
+        <div class="quote-box fade-in-element delay-5">
+          <div class="quote-content">
+            <h4 class="quote-title">24/7 Global Mindset</h4>
+            <div class="quote-text">
+              <p>Our team works across time zones, so momentum never stops. Innovation keeps moving, even while the world rests.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-12">
+        <div class="quote-box fade-in-element delay-6">
+          <div class="quote-content">
+            <h4 class="quote-title">Results, Not Rituals</h4>
+            <div class="quote-text">
+              <p>No vanity metrics. Every campaign, every post, every ad exists to move the needle — clearly and measurably.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- Services Preview Section -->
+<section class="services-section">
+    <div class="container">
+        <div class="row mb-5">
+            <div class="col-12 text-center fade-in-element">
+                <h2 class="section-title">Services Your Brand Needs</h2>
+                <p class="section-subtitle">Comprehensive digital solutions to power your growth</p>
+                <a href="{{ url_for('services') }}" class="btn btn-outline-custom mt-3 btn-magnetic">View All Services</a>
+            </div>
+        </div>
+        
+        <div class="row">
+            <!-- Service 1 -->
+            <div class="col-lg-4 col-md-6 mb-4">
+                <div class="service-card fade-in-element">
+                    <div class="service-number">01</div>
+                    <h3 class="service-title">Creative & Content</h3>
+                    <ul class="service-list">
+                        <li>Graphic Designing</li>
+                        <li>Video Editing & Motion Graphics</li>
+                        <li>Copywriting</li>
+                    </ul>
+                    <div class="service-actions">
+                        <a href="{{ url_for('service_detail', service_id='creative-content') }}" class="btn btn-outline-custom btn-fixed">Learn More</a>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Service 2 -->
+            <div class="col-lg-4 col-md-6 mb-4">
+                <div class="service-card fade-in-element">
+                    <div class="service-number">02</div>
+                    <h3 class="service-title">Social & Community Growth</h3>
+                    <ul class="service-list">
+                        <li>Social Media Management</li>
+                        <li>Influencer Marketing & PR</li>
+                        <li>UGC & Creator Commerce</li>
+                    </ul>
+                    <div class="service-actions">
+                        <a href="{{ url_for('service_detail', service_id='social-growth') }}" class="btn btn-outline-custom btn-fixed">Learn More</a>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Service 3 -->
+            <div class="col-lg-4 col-md-6 mb-4">
+                <div class="service-card fade-in-element">
+                    <div class="service-number">03</div>
+                    <h3 class="service-title">Performance & Growth Marketing</h3>
+                    <ul class="service-list">
+                        <li>Performance Marketing (Paid Ads)</li>
+                        <li>Conversion Rate Optimization & Analytics</li>
+                        <li>ROI-focused strategy</li>
+                    </ul>
+                    <div class="service-actions">
+                        <a href="{{ url_for('service_detail', service_id='performance-marketing') }}" class="btn btn-outline-custom btn-fixed">Learn More</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- Reviews Section -->
+<section class="reviews-section">
+    <div class="container">
+        <div class="reviews-header fade-in-element">
+            <h2 class="section-title">What Our Clients Say</h2>
+            <p class="section-subtitle">Real feedback from amazing brands we've worked with</p>
+            
+            <div class="reviews-stats">
+                <div class="stat-item">
+                    <span class="stat-number">4.9</span>
+                    <span class="stat-label">Average Rating</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number">20+</span>
+                    <span class="stat-label">Happy Clients</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number">98%</span>
+                    <span class="stat-label">Would Recommend</span>
+                </div>
+            </div>
+        </div>
+<!-- Reviews Carousel -->
+<div class="reviews-container">
+    <div class="reviews-track auto-scroll" id="reviewsTrack">
+        <!-- Review 1 -->
+        <div class="review-card fade-in-element">
+            <div class="review-header">
+                <img src="https://static.vecteezy.com/system/resources/previews/039/334/802/large_2x/ai-generated-indian-female-student-free-photo.jpg"
+                     alt="Priya Sharma" class="review-avatar">
+                <div class="review-user-info">
+                    <h5 class="review-user-name">Priya Sharma</h5>
+                    <div class="review-user-role">Marketing Director</div>
+                    <div class="star-rating">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                    </div>
+                    <span class="review-date">2 weeks ago</span>
+                </div>
+            </div>
+            <div class="review-content">
+                <p>Working with Shout OTB transformed our digital presence! Their social media strategy increased our engagement by 300% in just 3 months. The team is incredibly creative and always delivers beyond expectations.</p>
+            </div>
+        </div>
+
+        <!-- Review 2 -->
+        <div class="review-card fade-in-element delay-1">
+            <div class="review-header">
+                <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&w=400&h=400&fit=crop&crop=face&fp-y=0.6&q=80" 
+                     alt="Arjun Patel" class="review-avatar">
+                <div class="review-user-info">
+                    <h5 class="review-user-name">Arjun Patel</h5>
+                    <div class="review-user-role">E-commerce Founder</div>
+                    <div class="star-rating">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star-half-alt"></i>
+                    </div>
+                    <span class="review-date">1 month ago</span>
+                </div>
+            </div>
+            <div class="review-content">
+                <p>Their performance marketing expertise helped us scale our e-commerce business 5x. The data-driven approach and constant optimization resulted in the best ROAS we've ever seen. Highly recommended!</p>
+            </div>
+        </div>
+
+        <!-- Review 3 -->
+        <div class="review-card fade-in-element delay-2">
+            <div class="review-header">
+                <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?ixlib=rb-4.0.3&w=400&h=400&fit=crop&crop=face&fp-y=0.6&q=80" 
+                     alt="Neha Kapoor" class="review-avatar">
+                <div class="review-user-info">
+                    <h5 class="review-user-name">Neha Kapoor</h5>
+                    <div class="review-user-role">Content Creator</div>
+                    <div class="star-rating">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                    </div>
+                    <span class="review-date">3 months ago</span>
+                </div>
+            </div>
+            <div class="review-content">
+                <p>The video editing and motion graphics team is phenomenal! They understood our brand vision perfectly and created stunning visuals that elevated our content. Professional and always meeting deadlines.</p>
+            </div>
+        </div>
+
+        <!-- Review 4 -->
+        <div class="review-card fade-in-element delay-3">
+            <div class="review-header">
+                <img src="https://easy-peasy.ai/cdn-cgi/image/quality=70,format=auto,width=500/https://media.easy-peasy.ai/acbf26e4-022c-4e7a-b363-07829ab58ce7/344673fb-4d80-489b-8cc2-748076315e35.png" 
+                     alt="Rahul Verma" class="review-avatar">
+                <div class="review-user-info">
+                    <h5 class="review-user-name">Rahul Verma</h5>
+                    <div class="review-user-role">D2C Brand Owner</div>
+                    <div class="star-rating">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                    </div>
+                    <span class="review-date">2 months ago</span>
+                </div>
+            </div>
+            <div class="review-content">
+                <p>Outstanding WhatsApp marketing campaign! They helped us build a 10K+ subscriber community in just 2 months. The personalized approach delivered incredible results for our D2C brand.</p>
+            </div>
+        </div>
+
+        <!-- Review 5 -->
+        <div class="review-card fade-in-element delay-4">
+            <div class="review-header">
+                <img src="https://creator.nightcafe.studio/jobs/Xe92XQZIrKqVXzbEp4vw/Xe92XQZIrKqVXzbEp4vw--1--cubbh.jpg" 
+                     alt="Ananya Reddy" class="review-avatar">
+                <div class="review-user-info">
+                    <h5 class="review-user-name">Ananya Reddy</h5>
+                    <div class="review-user-role">Startup Founder</div>
+                    <div class="star-rating">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                    </div>
+                    <span class="review-date">1 week ago</span>
+                </div>
+            </div>
+            <div class="review-content">
+                <p>Shout OTB's influencer marketing strategy connected us with the perfect creators. Our brand awareness skyrocketed and sales followed. They truly understand the Indian market dynamics.</p>
+            </div>
+        </div>
+
+        <!-- Review 6 -->
+        <div class="review-card fade-in-element delay-5">
+            <div class="review-header">
+                <img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-4.0.3&w=400&h=400&fit=crop&crop=face&fp-y=0.6&q=80" 
+                     alt="Vikram Singh" class="review-avatar">
+                <div class="review-user-info">
+                    <h5 class="review-user-name">Vikram Singh</h5>
+                    <div class="review-user-role">Agency Director</div>
+                    <div class="star-rating">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                    </div>
+                    <span class="review-date">3 weeks ago</span>
+                </div>
+            </div>
+            <div class="review-content">
+                <p>The CRO and analytics services helped us identify key bottlenecks we were missing. Their insights led to a 45% increase in our conversion rates. Data-driven decisions at their best!</p>
+            </div>
+        </div>
+    </div>
+
+        <!-- Add Review Section -->
+        {% if current_user.is_authenticated %}
+        <div class="add-review-section fade-in-element">
+            <h4>Share Your Experience</h4>
+            <form id="reviewForm" method="POST" action="{{ url_for('add_review') }}">
+                <div class="review-form-group">
+                    <div class="rating-select" id="ratingStars">
+                        <i class="fas fa-star rating-star" data-rating="1"></i>
+                        <i class="fas fa-star rating-star" data-rating="2"></i>
+                        <i class="fas fa-star rating-star" data-rating="3"></i>
+                        <i class="fas fa-star rating-star" data-rating="4"></i>
+                        <i class="fas fa-star rating-star" data-rating="5"></i>
+                    </div>
+                    <input type="hidden" name="rating" id="selectedRating" required>
+                </div>
+                
+                <div class="review-form-group">
+                    <select class="form-control mb-3" name="service_category" id="serviceCategory" onchange="toggleReviewServiceOther()">
+                        <option value="">Select Service Category (Optional)</option>
+                        <option value="Creative & Content">Creative & Content</option>
+                        <option value="Social Media">Social Media</option>
+                        <option value="Performance Marketing">Performance Marketing</option>
+                        <option value="Web Development">Web Development</option>
+                        <option value="AI Solutions">AI Solutions</option>
+                        <option value="WhatsApp Marketing">WhatsApp Marketing</option>
+                        <option value="Branding">Branding</option>
+                        <option value="Influencer Marketing">Influencer Marketing</option>
+                        <option value="other">Other (Please specify)</option>
+                    </select>
+                    
+                    <!-- Custom Service Input for Reviews (Hidden by default) -->
+                    <div class="mt-2" id="reviewServiceOtherContainer" style="display: none;">
+                        <input type="text" class="form-control" id="service_category_other" name="service_category_other" 
+                            placeholder="Enter the service category...">
+                    </div>
+                    
+                    <textarea class="form-control review-textarea" name="comment" 
+                            placeholder="Share your experience working with us..." 
+                            required></textarea>
+                </div>
+                
+                <!-- ADD THIS SUBMIT BUTTON -->
+                <button type="submit" class="btn btn-custom">
+                    <i class="fas fa-paper-plane me-2"></i>Submit Review
+                </button>
+            </form> <!-- CLOSE THE FORM TAG -->
+        </div>
+        {% else %}
+
+        <!-- Login Prompt -->
+        <div class="login-prompt fade-in-element">
+            <i class="fas fa-lock"></i>
+            <h4>Join the Conversation</h4>
+            <p>Login to share your experience and leave a review</p>
+            <div class="d-flex gap-2 justify-content-center flex-wrap">
+                <a href="{{ url_for('login') }}" class="btn-sm-custom">
+                    <i class="fas fa-sign-in-alt"></i>Login
+                </a>
+                <a href="{{ url_for('register') }}" class="btn-sm-outline">
+                    <i class="fas fa-user-plus"></i>Register
+                </a>
+            </div>
+        </div>
+        {% endif %}
+    </div>
+</section>
+
+{% endblock %}

@@ -1,0 +1,333 @@
+<!-- templates/terms-conditions.html -->
+{% extends "base.html" %}
+
+{% block title %}Terms & Conditions - Shout OTB{% endblock %}
+
+{% block content %}
+<!-- Hero Section -->
+<section class="hero-section" style="min-height: 30vh;">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-10">  <!-- Same as your content sections -->
+                <nav aria-label="breadcrumb" class="fade-in-element">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="{{ url_for('index') }}" class="text-muted">Home</a></li>
+                        <li class="breadcrumb-item active text-orange">Terms & Conditions</li>
+                    </ol>
+                </nav>
+                <h1 class="hero-title fade-in-element delay-1">Terms & Conditions</h1>
+                <p class="hero-subtitle fade-in-element delay-2">Please read these terms carefully before using our services</p>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- Terms Content -->
+<section class="py-5">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-10">
+                <div class="terms-content">
+                    <!-- Last Updated -->
+                    <div class="last-updated fade-in-element">
+                        <p class="text-muted text-center mb-5">
+                            <i class="fas fa-clock me-2"></i>
+                            Last updated: November 2025
+                        </p>
+                    </div>
+
+                    <!-- Acceptance -->
+                    <div class="terms-section fade-in-element delay-1">
+                        <h2 class="section-title mb-4">Acceptance of Terms</h2>
+                        <p class="text-muted">
+                            By accessing and using <strong>Shout OTB</strong>'s website (<strong>shoutotb.com</strong>) and services, you accept and agree to be bound by these Terms and Conditions. This website is created and managed by <strong>Shahid Ali</strong> on behalf of Shout OTB.
+                        </p>
+                    </div>
+
+                    <!-- Services Description -->
+                    <div class="terms-section fade-in-element delay-2">
+                        <h2 class="section-title mb-4">Our Services</h2>
+                        <p class="text-muted mb-4">
+                            Shout OTB provides digital marketing, creative content, web development, and AI solutions services. All services are subject to:
+                        </p>
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <div class="value-item h-100">
+                                    <h5><i class="fas fa-file-signature text-orange me-2"></i>Service Agreements</h5>
+                                    <p class="text-muted small">Specific terms outlined in individual service contracts</p>
+                                </div>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <div class="value-item h-100">
+                                    <h5><i class="fas fa-money-bill-wave text-orange me-2"></i>Payment Terms</h5>
+                                    <p class="text-muted small">As specified in project proposals and invoices</p>
+                                </div>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <div class="value-item h-100">
+                                    <h5><i class="fas fa-calendar-alt text-orange me-2"></i>Delivery Timelines</h5>
+                                    <p class="text-muted small">Mutually agreed upon project timelines</p>
+                                </div>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <div class="value-item h-100">
+                                    <h5><i class="fas fa-sync-alt text-orange me-2"></i>Revision Policies</h5>
+                                    <p class="text-muted small">Number of revisions as per service package</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Intellectual Property -->
+                    <div class="terms-section fade-in-element delay-3">
+                        <h2 class="section-title mb-4">Intellectual Property</h2>
+                        
+                        <h5 class="text-orange mb-3">Our Intellectual Property</h5>
+                        <p class="text-muted mb-4">
+                            All content on this website, including but not limited to text, animations, graphics, logos, images, and software, is the property of Shout OTB and is protected by copyright and intellectual property laws.
+                        </p>
+
+                        <h5 class="text-orange mb-3">Client Content</h5>
+                        <p class="text-muted">
+                            Clients retain ownership of all content, materials, and data provided to Shout OTB for service delivery. We only use client content for the purpose of providing agreed-upon services.
+                        </p>
+                    </div>
+
+                    <!-- User Responsibilities -->
+                    <div class="terms-section fade-in-element delay-4">
+                        <h2 class="section-title mb-4">User Responsibilities</h2>
+                        <div class="responsibilities-list">
+                            <div class="d-flex align-items-start mb-3">
+                                <i class="fas fa-check-circle text-orange me-3 mt-1"></i>
+                                <div>
+                                    <h5 class="mb-1">Accurate Information</h5>
+                                    <p class="text-muted mb-0">Provide accurate and complete information when using our services</p>
+                                </div>
+                            </div>
+                            <div class="d-flex align-items-start mb-3">
+                                <i class="fas fa-shield-alt text-orange me-3 mt-1"></i>
+                                <div>
+                                    <h5 class="mb-1">Security</h5>
+                                    <p class="text-muted mb-0">Maintain the confidentiality of your account credentials</p>
+                                </div>
+                            </div>
+                            <div class="d-flex align-items-start mb-3">
+                                <i class="fas fa-gavel text-orange me-3 mt-1"></i>
+                                <div>
+                                    <h5 class="mb-1">Legal Compliance</h5>
+                                    <p class="text-muted mb-0">Use our services in compliance with all applicable laws</p>
+                                </div>
+                            </div>
+                            <div class="d-flex align-items-start">
+                                <i class="fas fa-ban text-orange me-3 mt-1"></i>
+                                <div>
+                                    <h5 class="mb-1">Prohibited Activities</h5>
+                                    <p class="text-muted mb-0">Do not engage in spamming, hacking, or any illegal activities</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Payments & Refunds -->
+                    <div class="terms-section fade-in-element delay-5">
+                        <h2 class="section-title mb-4">Payments & Refunds</h2>
+                        <div class="payment-info">
+                            <div class="row">
+                                <div class="col-md-6 mb-4">
+                                    <div class="text-center p-3" style="background: var(--secondary-black); border-radius: 8px;">
+                                        <i class="fas fa-credit-card fa-2x text-orange mb-3"></i>
+                                        <h5>Payment Terms</h5>
+                                        <p class="text-muted small mb-0">Payments are due as per agreed milestones or monthly billing cycles</p>
+                                    </div>
+                                </div>
+                                <div class="col-md-6 mb-4">
+                                    <div class="text-center p-3" style="background: var(--secondary-black); border-radius: 8px;">
+                                        <i class="fas fa-exchange-alt fa-2x text-orange mb-3"></i>
+                                        <h5>Refund Policy</h5>
+                                        <p class="text-muted small mb-0">Refunds considered on case-by-case basis as per service agreement</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Add after "Payments & Refunds" section -->
+                    <div class="terms-section fade-in-element delay-6">
+                        <h2 class="section-title mb-4">Service Level Agreement (SLA)</h2>
+                        <div class="row">
+                            <div class="col-md-6 mb-4">
+                                <div class="text-center p-3" style="background: var(--secondary-black); border-radius: 8px;">
+                                    <i class="fas fa-headset fa-2x text-orange mb-3"></i>
+                                    <h5>Support Response</h5>
+                                    <p class="text-muted small mb-0">24-48 hour response time for non-urgent queries</p>
+                                </div>
+                            </div>
+                            <div class="col-md-6 mb-4">
+                                <div class="text-center p-3" style="background: var(--secondary-black); border-radius: 8px;">
+                                    <i class="fas fa-tachometer-alt fa-2x text-orange mb-3"></i>
+                                    <h5>Uptime Guarantee</h5>
+                                    <p class="text-muted small mb-0">99.5% website uptime for hosted services</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="terms-section fade-in-element delay-7">
+                        <h2 class="section-title mb-4">Confidentiality</h2>
+                        <p class="text-muted mb-4">
+                            Both parties agree to maintain the confidentiality of proprietary information received from the other party. This includes:
+                        </p>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <ul class="text-muted">
+                                    <li class="mb-2">Business strategies and plans</li>
+                                    <li class="mb-2">Proprietary technology and processes</li>
+                                    <li class="mb-2">Client lists and business relationships</li>
+                                </ul>
+                            </div>
+                            <div class="col-md-6">
+                                <ul class="text-muted">
+                                    <li class="mb-2">Financial information and pricing</li>
+                                    <li class="mb-2">Marketing strategies and campaigns</li>
+                                    <li class="mb-2">Any information marked as confidential</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="terms-section fade-in-element delay-8">
+                        <h2 class="section-title mb-4">Warranties & Disclaimers</h2>
+                        <div class="alert alert-dark" role="alert" style="background: var(--secondary-black); border-left: 4px solid var(--accent-orange);">
+                            <h5 class="alert-heading text-orange mb-3">
+                                <i class="fas fa-exclamation-triangle me-2"></i>
+                                Important Disclaimers
+                            </h5>
+                            <p class="text-muted mb-2">
+                                <strong>Results Disclaimer:</strong> While we strive to deliver optimal results, we cannot guarantee specific outcomes from our marketing services as they depend on various market factors.
+                            </p>
+                            <p class="text-muted mb-0">
+                                <strong>Service Availability:</strong> We reserve the right to modify or discontinue any service with 30 days' notice to affected clients.
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="terms-section fade-in-element delay-9">
+                        <h2 class="section-title mb-4">Force Majeure</h2>
+                        <p class="text-muted">
+                            Neither party shall be liable for any failure or delay in performing their obligations due to events beyond their reasonable control, including but not limited to acts of God, war, terrorism, riots, embargoes, acts of civil or military authorities, fire, floods, accidents, strikes, or shortages of transportation facilities, fuel, energy, labor, or materials.
+                        </p>
+                    </div>
+
+                    <div class="terms-section fade-in-element delay-10">
+                        <h2 class="section-title mb-4">Indemnification</h2>
+                        <p class="text-muted">
+                            You agree to indemnify and hold harmless Shout OTB, its employees, and agents from any claims, damages, liabilities, costs, or expenses (including reasonable attorneys' fees) arising from your use of our services, violation of these Terms, or infringement of any intellectual property or other right of any person or entity.
+                    </div>
+
+                    <div class="terms-section fade-in-element delay-11">
+                        <h2 class="section-title mb-4">Severability</h2>
+                        <p class="text-muted">
+                            If any provision of these Terms is found to be unenforceable or invalid, that provision shall be limited or eliminated to the minimum extent necessary so that these Terms shall otherwise remain in full force and effect and enforceable.
+                        </p>
+                    </div>
+
+                    <!-- Limitation of Liability -->
+                    <div class="terms-section fade-in-element delay-12">
+                        <h2 class="section-title mb-4">Limitation of Liability</h2>
+                        <div class="alert alert-dark" role="alert" style="background: var(--secondary-black); border-left: 4px solid var(--accent-orange);">
+                            <p class="text-muted mb-0">
+                                <strong>Shout OTB</strong> shall not be liable for any indirect, incidental, special, consequential, or punitive damages resulting from your use or inability to use our services. Our total liability shall not exceed the amount paid by you for the specific service causing the claim.
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- Termination -->
+                    <div class="terms-section fade-in-element delay-13">
+                        <h2 class="section-title mb-4">Termination</h2>
+                        <p class="text-muted">
+                            We reserve the right to terminate or suspend access to our services immediately, without prior notice, for conduct that we believe violates these Terms and Conditions or is harmful to other users, us, or third parties, or for any other reason.
+                        </p>
+                    </div>
+
+                    <!-- Governing Law -->
+                    <div class="terms-section fade-in-element delay-14">
+                        <h2 class="section-title mb-4">Governing Law</h2>
+                        <p class="text-muted">
+                            These Terms shall be governed and construed in accordance with the laws of India, without regard to its conflict of law provisions. Any disputes shall be subject to the exclusive jurisdiction of the courts in Bhopal, Madhya Pradesh.
+                        </div>
+
+                    <!-- Changes to Terms -->
+                    <div class="terms-section fade-in-element delay-15">
+                        <h2 class="section-title mb-4">Changes to Terms</h2>
+                        <p class="text-muted">
+                            We reserve the right to modify or replace these Terms at any time. If a revision is material, we will provide at least 30 days' notice prior to any new terms taking effect. What constitutes a material change will be determined at our sole discretion.
+                        </p>
+                    </div>
+                    <div class="terms-section fade-in-element delay-16">
+                        <h2 class="section-title mb-4">Dispute Resolution</h2>
+                        <p class="text-muted mb-4">
+                            In the event of any dispute, claim, or controversy arising out of or relating to these Terms, the parties agree to the following resolution process:
+                        </p>
+                        
+                        <div class="dispute-process">
+                            <div class="d-flex align-items-start mb-3">
+                                <div class="step-number me-3" style="width: 30px; height: 30px; background: var(--accent-orange); color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; flex-shrink: 0;">
+                                    1
+                                </div>
+                                <div>
+                                    <h5 class="mb-1">Informal Negotiation</h5>
+                                    <p class="text-muted mb-0">Parties will first attempt to resolve the dispute through informal negotiations for 30 days</p>
+                                </div>
+                            </div>
+                            <div class="d-flex align-items-start mb-3">
+                                <div class="step-number me-3" style="width: 30px; height: 30px; background: var(--accent-orange); color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; flex-shrink: 0;">
+                                    2
+                                </div>
+                                <div>
+                                    <h5 class="mb-1">Mediation</h5>
+                                    <p class="text-muted mb-0">If informal resolution fails, parties may pursue mediation before litigation</p>
+                                </div>
+                            </div>
+                            <div class="d-flex align-items-start">
+                                <div class="step-number me-3" style="width: 30px; height: 30px; background: var(--accent-orange); color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; flex-shrink: 0;">
+                                    3
+                                </div>
+                                <div>
+                                    <h5 class="mb-1">Legal Action</h5>
+                                    <p class="text-muted mb-0">As a last resort, legal proceedings may be initiated in Bhopal courts</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Contact Information -->
+                    <div class="terms-section fade-in-element delay-17">
+                        <h2 class="section-title mb-4">Contact Information</h2>
+                        <div class="contact-info-card p-4" style="background: var(--secondary-black); border-radius: 12px;">
+                            <p class="text-muted mb-3">
+                                For any questions about these Terms and Conditions, please contact us:
+                            </p>
+                            <div class="row">
+                                <div class="col-md-6 mb-3">
+                                    <p class="mb-2">
+                                        <i class="fas fa-envelope text-orange me-2"></i>
+                                        <strong>Email:</strong><a href="mailto:shoutotb@gmail.com"> shoutotb@gmail.com</a>
+                                    </p>
+                                    <p class="mb-2">
+                                        <i class="fas fa-phone text-orange me-2"></i>
+                                        <strong>Phone:</strong><a href="tel:+91 97520 00546"> +91 97520 00546</a>
+                                    </p>
+                                    <p class="mb-0">
+                                        <i class="fas fa-map-marker-alt text-orange me-2"></i>
+                                        <strong>Address:</strong> 
+                                        Bhopal - 462026, Madhya Pradesh, India
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

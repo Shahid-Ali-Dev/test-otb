@@ -1,0 +1,302 @@
+<!-- templates/privacy-policy.html -->
+{% extends "base.html" %}
+
+{% block title %}Privacy Policy - Shout OTB{% endblock %}
+
+{% block content %}
+<!-- Hero Section -->
+<section class="hero-section" style="min-height: 30vh;">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-10">  <!-- Same as your content sections -->
+                <nav aria-label="breadcrumb" class="fade-in-element">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="{{ url_for('index') }}" class="text-muted">Home</a></li>
+                        <li class="breadcrumb-item active text-orange">Privacy Policy</li>
+                    </ol>
+                </nav>
+                <h1 class="hero-title fade-in-element delay-1">Privacy Policy</h1>
+                <p class="hero-subtitle fade-in-element delay-2">Your privacy and data security are our top priority</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Privacy Policy Content -->
+<section class="py-5">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-10">
+                <div class="policy-content">
+                    <!-- Last Updated -->
+                    <div class="last-updated fade-in-element">
+                        <p class="text-muted text-center mb-5">
+                            <i class="fas fa-clock me-2"></i>
+                            Last updated: November 2025
+                        </p>
+                    </div>
+
+                    <!-- Introduction -->
+                    <div class="policy-section fade-in-element delay-1">
+                        <h2 class="section-title mb-4">Introduction</h2>
+                        <p class="text-muted mb-4">
+                            At <strong>Shout OTB</strong> ("we," "our," or "us"), we are committed to protecting your privacy and ensuring the security of your personal information. This Privacy Policy explains how we collect, use, disclose, and safeguard your information when you visit our website <strong>shoutotb.com</strong> or use our services.
+                        </p>
+                        <p class="text-muted">
+                            This website is created and managed by <strong>Shahid Ali</strong> on behalf of Shout OTB. By using our website, you consent to the practices described in this policy.
+                        </p>
+                    </div>
+
+                    <!-- Information We Collect -->
+                    <div class="policy-section fade-in-element delay-2">
+                        <h2 class="section-title mb-4">Information We Collect</h2>
+                        
+                        <h5 class="text-orange mb-3">Personal Information</h5>
+                        <ul class="text-muted mb-4">
+                            <li class="mb-2">Name and contact details (email, phone number)</li>
+                            <li class="mb-2">Company information</li>
+                            <li class="mb-2">Service preferences and requirements</li>
+                            <li class="mb-2">Communication history with our team</li>
+                        </ul>
+
+                        <h5 class="text-orange mb-3">Automatically Collected Information</h5>
+                        <ul class="text-muted">
+                            <li class="mb-2">IP address and browser type</li>
+                            <li class="mb-2">Pages visited and time spent on site</li>
+                            <li class="mb-2">Referring website and search terms</li>
+                            <li class="mb-2">Device information and operating system</li>
+                        </ul>
+                    </div>
+
+                    <!-- How We Use Your Information -->
+                    <div class="policy-section fade-in-element delay-3">
+                        <h2 class="section-title mb-4">How We Use Your Information</h2>
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <div class="value-item h-100">
+                                    <h5><i class="fas fa-cogs text-orange me-2"></i>Service Delivery</h5>
+                                    <p class="text-muted small">To provide and maintain our digital marketing and creative services</p>
+                                </div>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <div class="value-item h-100">
+                                    <h5><i class="fas fa-comments text-orange me-2"></i>Communication</h5>
+                                    <p class="text-muted small">To respond to inquiries and provide customer support</p>
+                                </div>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <div class="value-item h-100">
+                                    <h5><i class="fas fa-chart-line text-orange me-2"></i>Analytics</h5>
+                                    <p class="text-muted small">To improve our website and services through data analysis</p>
+                                </div>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <div class="value-item h-100">
+                                    <h5><i class="fas fa-shield-alt text-orange me-2"></i>Security</h5>
+                                    <p class="text-muted small">To protect against fraudulent activities and ensure security</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Data Protection -->
+                    <div class="policy-section fade-in-element delay-4">
+                        <h2 class="section-title mb-4">Data Protection & Security</h2>
+                        <div class="security-features">
+                            <div class="row">
+                                <div class="col-md-4 text-center mb-4">
+                                    <div class="feature-icon mb-3">
+                                        <i class="fas fa-lock fa-2x text-orange"></i>
+                                    </div>
+                                    <h5>Encrypted Data</h5>
+                                    <p class="text-muted small">All sensitive data is encrypted using industry-standard protocols</p>
+                                </div>
+                                <div class="col-md-4 text-center mb-4">
+                                    <div class="feature-icon mb-3">
+                                        <i class="fas fa-user-shield fa-2x text-orange"></i>
+                                    </div>
+                                    <h5>Access Control</h5>
+                                    <p class="text-muted small">Strict access controls limit who can view your personal information</p>
+                                </div>
+                                <div class="col-md-4 text-center mb-4">
+                                    <div class="feature-icon mb-3">
+                                        <i class="fas fa-database fa-2x text-orange"></i>
+                                    </div>
+                                    <h5>Secure Storage</h5>
+                                    <p class="text-muted small">Your data is stored on secure servers with regular backups</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Your Rights -->
+                    <div class="policy-section fade-in-element delay-5">
+                        <h2 class="section-title mb-4">Your Privacy Rights</h2>
+                        <div class="rights-list">
+                            <div class="d-flex align-items-start mb-3">
+                                <i class="fas fa-eye text-orange me-3 mt-1"></i>
+                                <div>
+                                    <h5 class="mb-1">Right to Access</h5>
+                                    <p class="text-muted mb-0">You can request copies of your personal data we hold</p>
+                                </div>
+                            </div>
+                            <div class="d-flex align-items-start mb-3">
+                                <i class="fas fa-edit text-orange me-3 mt-1"></i>
+                                <div>
+                                    <h5 class="mb-1">Right to Correction</h5>
+                                    <p class="text-muted mb-0">You can request correction of inaccurate information</p>
+                                </div>
+                            </div>
+                            <div class="d-flex align-items-start mb-3">
+                                <i class="fas fa-trash text-orange me-3 mt-1"></i>
+                                <div>
+                                    <h5 class="mb-1">Right to Deletion</h5>
+                                    <p class="text-muted mb-0">You can request deletion of your personal data</p>
+                                </div>
+                            </div>
+                            <div class="d-flex align-items-start">
+                                <i class="fas fa-ban text-orange me-3 mt-1"></i>
+                                <div>
+                                    <h5 class="mb-1">Right to Object</h5>
+                                    <p class="text-muted mb-0">You can object to our processing of your personal data</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Third-Party Services -->
+                    <div class="policy-section fade-in-element delay-6">
+                        <h2 class="section-title mb-4">Third-Party Services</h2>
+                        <p class="text-muted mb-4">
+                            We may use trusted third-party services to enhance our website functionality:
+                        </p>
+                        <ul class="text-muted">
+                            <li class="mb-2"><strong>Google Analytics:</strong> For website traffic analysis</li>
+                            <li class="mb-2"><strong>Cloudinary:</strong> For media storage and optimization</li>
+                            <li class="mb-2"><strong>Email Service Providers:</strong> For communication</li>
+                            <li class="mb-2"><strong>Payment Processors:</strong> For secure transactions (if applicable)</li>
+                        </ul>
+                        <p class="text-muted">
+                            These services have their own privacy policies, and we recommend reviewing them.
+                        </p>
+                    </div>
+
+                    <!-- Add after "Third-Party Services" section -->
+                    <div class="policy-section fade-in-element delay-7">
+                        <h2 class="section-title mb-4">Data Retention & Deletion</h2>
+                        <p class="text-muted mb-4">
+                            We retain your personal information only for as long as necessary to fulfill the purposes outlined in this Privacy Policy, unless a longer retention period is required or permitted by law.
+                        </p>
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <div class="value-item h-100">
+                                    <h5><i class="fas fa-hourglass-half text-orange me-2"></i>Retention Period</h5>
+                                    <p class="text-muted small">Client data: 3 years after service completion<br>Website analytics: 26 months</p>
+                                </div>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <div class="value-item h-100">
+                                    <h5><i class="fas fa-eraser text-orange me-2"></i>Data Deletion</h5>
+                                    <p class="text-muted small">You can request data deletion anytime. We'll process requests within 30 days</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="policy-section fade-in-element delay-8">
+                        <h2 class="section-title mb-4">International Data Transfers</h2>
+                        <p class="text-muted">
+                            Your information may be transferred to and maintained on computers located outside of your state, province, country, or other governmental jurisdiction where the data protection laws may differ from those of your jurisdiction. We ensure appropriate safeguards are in place for such transfers.
+                        </p>
+                    </div>
+
+                    <div class="policy-section fade-in-element delay-9">
+                        <h2 class="section-title mb-4">Children's Privacy</h2>
+                        <p class="text-muted">
+                            Our services are not directed to individuals under 18. We do not knowingly collect personal information from children under 18. If we become aware that a child under 18 has provided us with personal information, we will take steps to delete such information.
+                        </p>
+                    </div>
+
+                    <div class="policy-section fade-in-element delay-10">
+                        <h2 class="section-title mb-4">Data Breach Notification</h2>
+                        <p class="text-muted mb-4">
+                            In the event of a data breach that compromises your personal information, we will:
+                        </p>
+                        <ul class="text-muted">
+                            <li class="mb-2">Notify you within 72 hours of becoming aware of the breach</li>
+                            <li class="mb-2">Describe the nature of the breach and data involved</li>
+                            <li class="mb-2">Outline steps we're taking to address the breach</li>
+                            <li class="mb-2">Provide guidance on protective measures you can take</li>
+                        </ul>
+                    </div>
+                    <div class="policy-section fade-in-element delay-11">
+                        <h2 class="section-title mb-4">Cookie Policy</h2>
+                        <p class="text-muted mb-4">
+                            We use cookies and similar tracking technologies to track activity on our service and hold certain information.
+                        </p>
+                        
+                        <h5 class="text-orange mb-3">Types of Cookies We Use</h5>
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <div class="value-item h-100">
+                                    <h5><i class="fas fa-cookie text-orange me-2"></i>Essential Cookies</h5>
+                                    <p class="text-muted small">Required for website functionality and security</p>
+                                </div>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <div class="value-item h-100">
+                                    <h5><i class="fas fa-chart-bar text-orange me-2"></i>Analytics Cookies</h5>
+                                    <p class="text-muted small">Help us understand how visitors interact with our website</p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <p class="text-muted">
+                            You can instruct your browser to refuse all cookies or to indicate when a cookie is being sent. However, if you do not accept cookies, you may not be able to use some portions of our service.
+                        </p>
+                    </div>
+
+                    <!-- Contact Information -->
+                    <div class="policy-section fade-in-element delay-12">
+                        <h2 class="section-title mb-4">Contact Us</h2>
+                        <div class="contact-info-card p-4" style="background: var(--secondary-black); border-radius: 12px;">
+                            <p class="text-muted mb-3">
+                                If you have any questions about this Privacy Policy or your personal data, please contact us:
+                            </p>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <p class="mb-2">
+                                        <i class="fas fa-envelope text-orange me-2"></i>
+                                        <strong>Email:</strong><a href="mailto:shoutotb@gmail.com"> shoutotb@gmail.com</a>
+                                    </p>
+                                    <p class="mb-2">
+                                        <i class="fas fa-phone text-orange me-2"></i>
+                                        <strong>Phone:</strong><a href="tel:+919752000546"> +91 97520 00546</a>
+                                    </p>
+                                    <p class="mb-0">
+                                        <i class="fas fa-map-marker-alt text-orange me-2"></i>
+                                        <strong>Address:</strong> A-17 Pallavi Nagar, Bawadiya Kalan, Bhopal - 462026
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Policy Updates -->
+                    <div class="policy-section fade-in-element delay-13">
+                        <div class="alert alert-dark" role="alert" style="background: var(--secondary-black); border: 1px solid rgba(255,107,53,0.2);">
+                            <h5 class="alert-heading text-orange">
+                                <i class="fas fa-info-circle me-2"></i>
+                                Policy Updates
+                            </h5>
+                            <p class="text-muted mb-0">
+                                We may update this Privacy Policy from time to time. We will notify you of any changes by posting the new Privacy Policy on this page and updating the "Last Updated" date.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

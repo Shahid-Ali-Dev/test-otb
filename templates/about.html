@@ -1,0 +1,281 @@
+{% extends "base.html" %}
+
+{% block title %}About Us - Shout OTB{% endblock %}
+
+{% block content %}
+<!-- About Hero Section -->
+<section class="hero-section"
+         style="background-image: 
+                    url('{{ url_for('static', filename='images/hero bg founder.avif') }}'),
+                    url('{{ url_for('static', filename='images/hero bg founder.webp') }}'),
+                    url('{{ url_for('static', filename='images/hero bg founder.png') }}');
+                background-position: center;
+                background-size: cover;
+                background-repeat: no-repeat;
+                position: relative;
+                padding: 120px 0;
+                border-radius: 20px;
+                overflow: hidden;">
+
+    <div class="container position-relative" style="z-index: 2;">
+        <div class="row align-items-center text-center text-lg-start justify-content-center">
+            <div class="col-lg-8">
+                <div class="hero-content fade-in-element">
+                    <h1 class="hero-title">About Shout OTB</h1>
+                    <p class="hero-subtitle text-light" style="font-size: 1.25rem;">
+                        Where Creative Vision Meets Digital Innovation
+                    </p>
+                    <a href="{{ url_for('portfolio') }}" class="btn btn-custom btn-magnetic mt-3">
+                        See Our Work
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Our Story Section -->
+<section class="py-5">
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-lg-6 mb-4 mb-lg-0">
+               
+                <div class="fade-in-element">
+                    <h2 class="section-title mb-4">Our Story</h2>
+                    <p class="text-muted mb-4" style="font-size: 1.1rem; line-height: 1.7;">
+                        Founded in 2025 by <strong>Swati Bindha</strong> with 10+ years of Marketing experience, <strong>Shout Out Of The Box</strong> emerged from a simple yet powerful vision: to deliver exceptional digital solutions that don't break the bank. We believe every business, regardless of size, deserves access to premium creative and digital marketing services.
+                    </p>
+                    <p class="text-muted mb-4" style="font-size: 1.1rem; line-height: 1.7;">
+                        The name "Shout OTB" reflects our core philosophy - we help brands stand out from the crowd and make some noise in their industry. We're not just another agency; we're your strategic partner in growth, combining creative excellence with data-driven results.
+                    </p>
+                    
+                    <!-- Office Address -->
+                    <div class="office-address mt-4 p-4" style="background: var(--secondary-black); border-radius: 12px; border-left: 4px solid var(--accent-orange);">
+                        <h5 class="text-orange mb-3">Our Office</h5>
+                        <p class="text-muted mb-0" style="font-size: 1.05rem; line-height: 1.6;">
+                            <i class="fas fa-map-marker-alt text-orange me-2"></i>
+                            A-17 Pallavi Nagar, Bawadiya Kalan<br>
+                            Bhopal - 462026, Madhya Pradesh<br>
+                            India
+                        </p>
+                    </div>
+
+                    <div class="d-flex flex-wrap gap-3 mt-4">
+                        <div class="stat-highlight">
+                            <h3 class="text-orange mb-1">2025</h3>
+                            <p class="text-muted mb-0">Established</p>
+                        </div>
+                        <div class="stat-highlight">
+                            <h3 class="text-orange mb-1">10+</h3>
+                            <p class="text-muted mb-0">Services</p>
+                        </div>
+                        <div class="stat-highlight">
+                            <h3 class="text-orange mb-1">100%</h3>
+                            <p class="text-muted mb-0">Client Focus</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+     
+            
+            <!-- Brand Logo/Image Placeholder -->
+            <div class="col-lg-6 text-center">
+                <div class="fade-in-element delay-1">
+                    <div class="brand-logo-container">
+                        <img src="{{ url_for('static', filename='images/Asset 18.png') }}" 
+                             alt="Shout OTB Brand Logo"
+                             class="brand-logo-img">
+                    </div>
+                    <p class="text-muted mt-3">Your Vision, Our Mission</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+<!-- Our Mission & Vision -->
+<section class="py-5" style="background: var(--secondary-black);">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-6 mb-4 mb-lg-0">
+                <div class="fade-in-element">
+                    <div class="mission-card">
+                        <div class="mission-icon">
+                            <i class="fas fa-bullseye"></i>
+                        </div>
+                        <h3 class="section-title mb-3">Our Mission</h3>
+                        <p class="text-muted">
+                            To democratize access to premium digital solutions by providing affordable, high-quality services that drive real business growth. We're committed to being the catalyst that transforms innovative ideas into market-leading brands.
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <div class="fade-in-element delay-1">
+                    <div class="mission-card">
+                        <div class="mission-icon">
+                            <i class="fas fa-eye"></i>
+                        </div>
+                        <h3 class="section-title mb-3">Our Vision</h3>
+                        <p class="text-muted">
+                            To become the most trusted creative partner for startups and growing businesses, recognized for our innovative approach, exceptional results, and unwavering commitment to client success in the digital landscape.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Why Choose Us -->
+<section class="py-5">
+    <div class="container">
+        <div class="row mb-5">
+            <div class="col-12 text-center">
+                <h2 class="section-title mb-3 fade-in-element">Why Choose Shout OTB?</h2>
+                <p class="section-subtitle fade-in-element delay-1">The perfect blend of creativity, strategy, and execution</p>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-lg-4 col-md-6 mb-4">
+                <div class="feature-card fade-in-element delay-1">
+                    <div class="feature-icon">
+                        <i class="fas fa-lightbulb"></i>
+                    </div>
+                    <h4>Creative Excellence</h4>
+                    <p class="text-muted">We blend artistic vision with strategic thinking to create work that not only looks great but delivers results.</p>
+                </div>
+            </div>
+            
+            <div class="col-lg-4 col-md-6 mb-4">
+                <div class="feature-card fade-in-element delay-2">
+                    <div class="feature-icon">
+                        <i class="fas fa-chart-line"></i>
+                    </div>
+                    <h4>Data-Driven Approach</h4>
+                    <p class="text-muted">Every decision is backed by data and analytics to ensure maximum ROI and measurable growth.</p>
+                </div>
+            </div>
+            
+            <div class="col-lg-4 col-md-6 mb-4">
+                <div class="feature-card fade-in-element delay-3">
+                    <div class="feature-icon">
+                        <i class="fas fa-hand-holding-usd"></i>
+                    </div>
+                    <h4>Transparent Pricing</h4>
+                    <p class="text-muted">No hidden costs, no surprises. We offer premium services at prices that make sense for growing businesses.</p>
+                </div>
+            </div>
+            
+            <div class="col-lg-4 col-md-6 mb-4">
+                <div class="feature-card fade-in-element delay-1">
+                    <div class="feature-icon">
+                        <i class="fas fa-rocket"></i>
+                    </div>
+                    <h4>Fast Execution</h4>
+                    <p class="text-muted">We understand that in digital, speed matters. Quick turnarounds without compromising on quality.</p>
+                </div>
+            </div>
+            
+            <div class="col-lg-4 col-md-6 mb-4">
+                <div class="feature-card fade-in-element delay-2">
+                    <div class="feature-icon">
+                        <i class="fas fa-users"></i>
+                    </div>
+                    <h4>Collaborative Partnership</h4>
+                    <p class="text-muted">We work with you, not just for you. Your success is our success, and we're invested in your growth.</p>
+                </div>
+            </div>
+            
+            <div class="col-lg-4 col-md-6 mb-4">
+                <div class="feature-card fade-in-element delay-3">
+                    <div class="feature-icon">
+                        <i class="fas fa-shield-alt"></i>
+                    </div>
+                    <h4>Future-Ready Solutions</h4>
+                    <p class="text-muted">From AI integration to emerging technologies, we keep you ahead of the digital curve.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Founder's Note -->
+<section class="py-5" style="background: var(--secondary-black);">
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-lg-8 mx-auto text-center">
+                <div class="fade-in-element">
+                    <div class="founder-quote">
+                        <i class="fas fa-quote-left quote-icon"></i>
+                        <p class="founder-message">
+                            "At Shout OTB, we believe that great ideas deserve exceptional execution. Our mission is to bridge the gap between creative vision and digital reality, making premium services accessible to every ambitious business. We're not just service providers; we're growth partners committed to your success."
+                        </p>
+                        <div class="founder-info">
+                            <h5 class="text-orange mb-1">Swati Bindha</h5>
+                            <p class="text-muted mb-0">Founder & CEO, Shout OTB</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Our Values -->
+<section class="py-5">
+    <div class="container">
+        <div class="row mb-5">
+            <div class="col-12 text-center">
+                <h2 class="section-title mb-3 fade-in-element">Our Core Values</h2>
+                <p class="section-subtitle fade-in-element delay-1">The principles that guide everything we do</p>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-6 mb-4">
+                <div class="value-item fade-in-element delay-1">
+                    <h4><span class="text-orange">Innovation</span> First</h4>
+                    <p class="text-muted">We constantly explore new technologies and creative approaches to keep our clients ahead of the competition.</p>
+                </div>
+            </div>
+            <div class="col-md-6 mb-4">
+                <div class="value-item fade-in-element delay-2">
+                    <h4><span class="text-orange">Quality</span> Above All</h4>
+                    <p class="text-muted">We never compromise on quality, delivering work that exceeds expectations and stands the test of time.</p>
+                </div>
+            </div>
+            <div class="col-md-6 mb-4">
+                <div class="value-item fade-in-element delay-3">
+                    <h4><span class="text-orange">Transparency</span> & Trust</h4>
+                    <p class="text-muted">Open communication, honest pricing, and clear processes build the foundation of lasting partnerships.</p>
+                </div>
+            </div>
+            <div class="col-md-6 mb-4">
+                <div class="value-item fade-in-element delay-4">
+                    <h4><span class="text-orange">Growth</span> Mindset</h4>
+                    <p class="text-muted">We measure our success by your growth, constantly optimizing strategies to drive better results.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- CTA Section -->
+<section class="py-5 fade-in-element">
+    <div class="container">
+        <div class="row">
+            <div class="col-12 text-center">
+                <h2 class="mb-4 fade-in-element delay-1">Ready to Shout About Your Brand?</h2>
+                <p class="mb-4 fade-in-element delay-2">Let's create something extraordinary together</p>
+                <div class="fade-in-element delay-3">
+                    <a href="{{ url_for('contact') }}" class="btn btn-custom btn-magnetic fade-in-element delay-2 me-0 me-md-3 mb-3 mb-md-0">Start Your Project</a>
+                    <a href="{{ url_for('services') }}" class="btn btn-outline-custom btn-magnetic fade-in-element delay-3">Explore Services</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

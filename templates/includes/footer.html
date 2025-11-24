@@ -1,0 +1,61 @@
+<footer class="footer dark-bg fade-in-element">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-4 mb-4">
+                <h5 class="mb-3">SHOUT OUT OF THE BOX</h5>
+                <p class="text-muted">Transforming brands with cutting-edge digital solutions that drive real results and measurable growth.</p>
+            </div>
+            
+            <div class="col-lg-2 col-md-6 mb-4">
+                <h5 class="mb-3">Quick Links</h5>
+                <ul class="list-unstyled">
+                    <li class="mb-2"><a href="{{ url_for('index') }}" class="text-muted text-decoration-none">Home</a></li>
+                    <li class="mb-2"><a href="{{ url_for('services') }}" class="text-muted text-decoration-none">Services</a></li>
+                    <li class="mb-2"><a href="{{ url_for('portfolio') }}" class="text-muted text-decoration-none">Portfolio</a></li>
+                    <li class="mb-2"><a href="{{ url_for('contact') }}" class="text-muted text-decoration-none">Contact</a></li>
+                    <li class="mb-2"><a href="{{ url_for('about') }}" class="text-muted text-decoration-none">About</a></li>
+                </ul>
+            </div>
+            
+            <div class="col-lg-3 col-md-6 mb-4">
+                <h5 class="mb-3">Services</h5>
+                <ul class="list-unstyled">
+                    <li class="mb-2"><a href="{{ url_for('service_detail', service_id='creative-content') }}" class="text-muted text-decoration-none">Creative & Content</a></li>
+                    <li class="mb-2"><a href="{{ url_for('service_detail', service_id='social-growth') }}" class="text-muted text-decoration-none">Social Media Growth</a></li>
+                    <li class="mb-2"><a href="{{ url_for('service_detail', service_id='performance-marketing') }}" class="text-muted text-decoration-none">Performance Marketing</a></li>
+                    <li class="mb-2"><a href="{{ url_for('service_detail', service_id='web-development') }}" class="text-muted text-decoration-none">Website Development</a></li>
+                    <li class="mb-2"><a href="{{ url_for('service_detail', service_id='ai-solutions') }}" class="text-muted text-decoration-none">AI Solutions</a></li>
+                </ul>
+            </div>
+            
+            <div class="col-lg-3 mb-4">
+                <h5 class="mb-3">Connect With Us</h5>
+                <div class="social-icons">
+                    <a href="https://www.facebook.com/shoutotb" class="social-icon" target="_blank"><i class="fab fa-facebook-f"></i></a>
+                    <a href="https://www.linkedin.com/in/shout-otb-b878a133b/" class="social-icon" target="_blank"><i class="fab fa-linkedin-in"></i></a>
+                    <a href="https://www.youtube.com/@shoutotb" class="social-icon" target="_blank"><i class="fab fa-youtube"></i></a>
+                    <a href="https://www.instagram.com/shoutotb" class="social-icon" target="_blank"><i class="fab fa-instagram"></i></a>
+                    <a href="https://x.com/shoutotb" class="social-icon" target="_blank"><i class="fab fa-twitter"></i></a>
+                    <a href="https://www.threads.com/@shoutotb" class="social-icon" target="_blank"><i class="fa-brands fa-at"></i></a>
+                </div>
+                
+                <div class="mt-3">
+                    <a href="mailto:shoutotb@gmail.com" class="email-link"><i class="fas fa-envelope me-2"></i>shoutotb@gmail.com</a>
+                </div>
+            </div>
+        </div>
+        
+        <hr class="my-4" style="border-color: rgba(255,255,255,0.1);">
+        
+        <!-- Update the footer section in your footer.html -->
+        <div class="row align-items-center copyright-row">
+            <div class="col-md-6">
+                <p class="text-muted mb-0">&copy; 2025 Shout OTB. All rights reserved.</p>
+            </div>
+            <div class="col-md-6 text-md-end">
+                <a href="{{ url_for('privacy_policy') }}" class="text-muted text-decoration-none me-3">Privacy Policy</a>
+                <a href="{{ url_for('terms_conditions') }}" class="text-muted text-decoration-none">Terms of Service</a>
+            </div>
+        </div>
+    </div>
+</footer>

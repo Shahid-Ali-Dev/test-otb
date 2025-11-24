@@ -1,0 +1,319 @@
+{% extends "base.html" %}
+
+{% block title %}Portfolio Management - Admin{% endblock %}
+
+{% block content %}
+<div class="container-fluid py-5" style="background: var(--primary-black); min-height: 100vh;">
+    <div class="container fade-in-element">
+        <!-- Header -->
+        <div class="row mb-5">
+            <div class="col-12">
+                <nav aria-label="breadcrumb" class="mb-3 breadcrumb-admin">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="{{ url_for('admin_portfolio') }}">Admin</a></li>
+                        <li class="breadcrumb-item active">Portfolio Management</li>
+                    </ol>
+                </nav>
+                
+                <div class="d-flex justify-content-between align-items-center">
+                    <h1 class="hero-title" style="font-size: 2.5rem;">Portfolio Management</h1>
+                    <button class="btn btn-sm-custom" data-bs-toggle="modal" data-bs-target="#addProjectModal">
+                        <i class="fas fa-plus me-2"></i>Add New Project
+                    </button>
+                </div>
+                <p class="text-muted">Manage your portfolio projects and content</p>
+            </div>
+        </div>
+
+        <!-- Stats Cards -->
+        <div class="row mb-4">
+            <div class="col-md-3 mb-3">
+                <div class="admin-stat-card">
+                    <div class="d-flex align-items-center">
+                        <div class="admin-stat-icon me-3">
+                            <i class="fas fa-play-circle"></i>
+                        </div>
+                        <div>
+                            <h4 class="mb-0 fw-bold text-light">{{ active_count }}</h4>
+                            <p class="text-muted mb-0">Active Projects</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3 mb-3">
+                <div class="admin-stat-card">
+                    <div class="d-flex align-items-center">
+                        <div class="admin-stat-icon me-3">
+                            <i class="fas fa-clock"></i>
+                        </div>
+                        <div>
+                            <h4 class="mb-0 fw-bold text-light">{{ coming_soon_count }}</h4>
+                            <p class="text-muted mb-0">Coming Soon</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3 mb-3">
+                <div class="admin-stat-card">
+                    <div class="d-flex align-items-center">
+                        <div class="admin-stat-icon me-3">
+                            <i class="fab fa-youtube"></i>
+                        </div>
+                        <div>
+                            <h4 class="mb-0 fw-bold text-light">{{ youtube_count }}</h4>
+                            <p class="text-muted mb-0">YouTube Videos</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3 mb-3">
+                <div class="admin-stat-card">
+                    <div class="d-flex align-items-center">
+                        <div class="admin-stat-icon me-3">
+                            <i class="fab fa-instagram"></i>
+                        </div>
+                        <div>
+                            <h4 class="mb-0 fw-bold text-light">{{ instagram_count }}</h4>
+                            <p class="text-muted mb-0">Instagram Reels</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Projects Table -->
+        <div class="admin-table">
+            <div class="p-4 border-bottom" style="border-color: rgba(255,255,255,0.1) !important;">
+                <h5 class="mb-0 text-light">All Portfolio Projects</h5>
+            </div>
+            
+            {% if portfolio_items %}
+            <div class="table-responsive">
+                <table class="table table-hover align-middle mb-0">
+                    <thead>
+                        <tr>
+                            <th class="ps-4 text-light">Project</th>
+                            <th class="text-light">Type</th>
+                            <th class="text-light">Category</th>
+                            <th class="text-light">Status</th>
+                            <th class="text-light">Created</th>
+                            <th class="text-end pe-4 text-light">Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for item in portfolio_items %}
+                        <tr class="fade-in-element">
+                            <td class="ps-4">
+                                <div class="d-flex align-items-center">
+                                    <div class="admin-stat-icon me-3" style="width: 50px; height: 50px;">
+                                        {% if item.videoType == 'instagram' %}
+                                            <i class="fab fa-instagram"></i>
+                                        {% else %}
+                                            <i class="fab fa-youtube"></i>
+                                        {% endif %}
+                                    </div>
+                                    <div>
+                                        <strong class="">{{ item.title }}</strong>
+                                        <div class="text-muted small" style="max-width: 300px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">
+                                            {{ item.description }}
+                                        </div>
+                                    </div>
+                                </div>
+                            </td>
+                            <td>
+                                <span class="badge {% if item.videoType == 'instagram' %}badge-admin{% else %}bg-orange{% endif %}">
+                                    {{ item.videoType|title if item.videoType else 'No Video' }}
+                                </span>
+                            </td>
+                            <td>
+                                <span class="badge badge-admin">{{ item.category|title }}</span>
+                            </td>
+                            <td>
+                                {% if item.status == 'active' %}
+                                    <span class="badge bg-success">Active</span>
+                                {% else %}
+                                    <span class="badge bg-warning">Coming Soon</span>
+                                {% endif %}
+                            </td>
+                            <td>
+                                <small class="text-muted">
+                                    {% if item.created_at %}
+                                        {% if item.created_at is string %}
+                                            {# Convert ISO string to datetime object for formatting #}
+                                            {{ item.created_at[:10] }} {# Just show YYYY-MM-DD from ISO format #}
+                                        {% else %}
+                                            {{ item.created_at.strftime('%b %d, %Y') }}
+                                        {% endif %}
+                                    {% else %}
+                                        Unknown
+                                    {% endif %}
+                                </small>
+                            </td>
+                            <td class="text-end pe-4">
+                                <div class="btn-group">
+                                    <button class="btn btn-sm-outline admin-view-btn" data-item-id="{{ item.id }}">
+                                        <i class="fas fa-eye"></i> View
+                                    </button>
+                                    <button class="btn btn-sm-outline admin-edit-btn" data-item-id="{{ item.id }}">
+                                        <i class="fas fa-edit"></i> Edit
+                                    </button>
+                                    <button class="btn btn-sm-outline admin-delete-btn" data-item-id="{{ item.id }}">
+                                        <i class="fas fa-trash"></i> Delete
+                                    </button>
+                                </div>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+            {% else %}
+            <div class="text-center py-5">
+                <div class="mb-4">
+                    <i class="fas fa-video fa-4x text-muted opacity-25"></i>
+                </div>
+                <h4 class="text-muted">No portfolio projects yet</h4>
+                <p class="text-muted">Get started by adding your first project</p>
+                <button class="btn btn-sm-custom mt-3" data-bs-toggle="modal" data-bs-target="#addProjectModal">
+                    <i class="fas fa-plus me-2"></i>Add First Project
+                </button>
+            </div>
+            {% endif %}
+        </div>
+    </div>
+</div>
+
+<!-- Add Project Modal -->
+<div class="modal fade admin-modal" id="addProjectModal" tabindex="-1">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header border-secondary">
+                <h5 class="modal-title text-orange">
+                    <i class="fas fa-plus me-2"></i>Add New Project
+                </h5>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body">
+                <form id="addProjectForm">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="mb-3">
+                                <label class="form-label text-light">Project Title</label>
+                                <input type="text" class="form-control" name="title" required maxlength="200">
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="mb-3">
+                                <label class="form-label text-light">Category</label>
+                                <select class="form-control" name="category" required>
+                                    <option value="">Select Category</option>
+                                    <option value="creative">Creative & Content</option>
+                                    <option value="social">Social Growth</option>
+                                    <option value="marketing">Performance Marketing</option>
+                                    <option value="development">Web Development</option>
+                                    <option value="ai">AI Solutions</option>
+                                    <option value="animation">Animation</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="mb-3">
+                        <label class="form-label text-light">Description</label>
+                        <textarea class="form-control" name="description" rows="3" required maxlength="500"></textarea>
+                        <div class="form-text text-muted">Brief description of the project</div>
+                    </div>
+                    
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="mb-3">
+                                <label class="form-label text-light">Video Type</label>
+                                <select class="form-control" name="videoType" id="videoTypeSelect">
+                                    <option value="youtube">YouTube</option>
+                                    <option value="instagram">Instagram</option>
+                                    <option value="">No Video (Coming Soon)</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="mb-3">
+                                <label class="form-label text-light" id="videoIdLabel">YouTube Video ID</label>
+                                <input type="text" class="form-control" name="videoId" id="videoIdInput" 
+                                       placeholder="e.g., dQw4w9WgXcQ">
+                                <div class="form-text text-muted" id="videoIdHelp">
+                                    The ID after "v=" in YouTube URL
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="mb-3">
+                        <label class="form-label text-light">Tags</label>
+                        <input type="text" class="form-control" name="tags" placeholder="e.g., Marketing, Social Media, Video">
+                        <div class="form-text text-muted">Comma separated tags</div>
+                    </div>
+                    
+                    <div class="mb-3">
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" name="is_coming_soon" id="comingSoonCheck">
+                            <label class="form-check-label text-light" for="comingSoonCheck">
+                                Mark as Coming Soon
+                            </label>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer border-secondary">
+                <button type="button" class="btn btn-sm-outline" data-bs-dismiss="modal">Cancel</button>
+                <button type="button" class="btn btn-sm-custom" id="saveProjectBtn">
+                    <i class="fas fa-save me-1"></i>Save Project
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- View Project Modal -->
+<div class="modal fade admin-modal" id="viewProjectModal" tabindex="-1">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header border-secondary">
+                <h5 class="modal-title text-orange">
+                    <i class="fas fa-eye me-2"></i>Project Details
+                </h5>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body" id="viewProjectContent">
+                <!-- Content loaded dynamically -->
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Delete Confirmation Modal -->
+<div class="modal fade admin-modal" id="deleteProjectModal" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header border-secondary">
+                <h5 class="modal-title text-orange">
+                    <i class="fas fa-exclamation-triangle me-2"></i>Confirm Delete
+                </h5>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body">
+                <p class="text-light">Are you sure you want to delete this project? This action cannot be undone.</p>
+                <p class="text-muted" id="deleteProjectName"></p>
+            </div>
+            <div class="modal-footer border-secondary">
+                <button type="button" class="btn btn-sm-outline" data-bs-dismiss="modal">Cancel</button>
+                <button type="button" class="btn btn-sm-custom" id="confirmDeleteBtn">
+                    <i class="fas fa-trash me-1"></i>Delete Project
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="{{ url_for('static', filename='js/admin.js') }}"></script>
+
+{% endblock %}

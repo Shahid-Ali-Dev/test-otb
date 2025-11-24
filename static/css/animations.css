@@ -1,0 +1,483 @@
+/* =========================
+   ANIMATIONS CSS - CLEANED & ORGANIZED
+   All functionality preserved, duplicates removed
+========================= */
+
+/* =========================
+   CORE ANIMATION KEYFRAMES
+========================= */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(40px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes fadeInLeft {
+    from {
+        opacity: 0;
+        transform: translateX(-40px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+@keyframes fadeInRight {
+    from {
+        opacity: 0;
+        transform: translateX(40px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+@keyframes pulseGlow {
+    0% {
+        box-shadow: 0 0 0 0 rgba(255, 107, 53, 0.4);
+    }
+    70% {
+        box-shadow: 0 0 0 15px rgba(255, 107, 53, 0);
+    }
+    100% {
+        box-shadow: 0 0 0 0 rgba(255, 107, 53, 0);
+    }
+}
+
+@keyframes float {
+    0%, 100% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-10px);
+    }
+}
+
+@keyframes hero-bg-move {
+    0% { background-position: center top; }
+    100% { background-position: center bottom; }
+}
+
+/* =========================
+   UNIVERSAL SCROLL ANIMATIONS
+========================= */
+.fade-in-element {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: all 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.fade-in-element.animated {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Staggered animation delays */
+.fade-in-element.delay-1 { transition-delay: 0.1s; }
+.fade-in-element.delay-2 { transition-delay: 0.2s; }
+.fade-in-element.delay-3 { transition-delay: 0.3s; }
+.fade-in-element.delay-4 { transition-delay: 0.4s; }
+.fade-in-element.delay-5 { transition-delay: 0.5s; }
+.fade-in-element.delay-6 { transition-delay: 0.6s; }
+.fade-in-element.delay-7 { transition-delay: 0.7s; }
+.fade-in-element.delay-8 { transition-delay: 0.8s; }
+.fade-in-element.delay-9 { transition-delay: 0.9s; }
+.fade-in-element.delay-10 { transition-delay: 1.0s; }
+.fade-in-element.delay-11 { transition-delay: 1.1s; }
+.fade-in-element.delay-12 { transition-delay: 1.2s; }
+.fade-in-element.delay-13 { transition-delay: 1.3s; }
+.fade-in-element.delay-14 { transition-delay: 1.4s; }
+.fade-in-element.delay-15 { transition-delay: 1.5s; }
+.fade-in-element.delay-16 { transition-delay: 1.6s; }
+.fade-in-element.delay-17 { transition-delay: 1.7s; }
+.fade-in-element.delay-18 { transition-delay: 1.8s; }
+
+/* =========================
+   COMPONENT-SPECIFIC ANIMATIONS
+========================= */
+
+/* Service Cards */
+.service-card {
+    opacity: 0;
+    transform: translateY(50px) scale(0.95);
+    transition: all 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.service-card.animated {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+}
+
+.service-card:hover {
+    transform: translateY(-10px) scale(1.03);
+    box-shadow: 0 25px 50px rgba(255, 107, 53, 0.2);
+}
+
+/* Video Cards */
+.video-card {
+    opacity: 0;
+    transform: translateY(40px);
+    transition: all 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.video-card.animated {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Quote Boxes */
+.quote-box {
+    opacity: 0;
+    transform: translateX(-30px);
+    transition: all 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.quote-box.animated {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+.quote-box:nth-child(even) {
+    transform: translateX(30px);
+}
+
+.quote-box:nth-child(even).animated {
+    transform: translateX(0);
+}
+
+/* Contact Forms */
+.contact-form-card,
+.contact-info-card,
+.quick-contact-card {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: all 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.contact-form-card.animated,
+.contact-info-card.animated,
+.quick-contact-card.animated {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Buttons */
+.btn-custom, 
+.btn-outline-custom {
+    opacity: 0;
+    transform: scale(0.9);
+    transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.btn-custom.animated, 
+.btn-outline-custom.animated {
+    opacity: 1;
+    transform: scale(1);
+}
+
+/* Stats */
+.stat-item {
+    opacity: 0;
+    transform: scale(0.8);
+    transition: all 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.stat-item.animated {
+    opacity: 1;
+    transform: scale(1);
+}
+
+/* =========================
+   FOOTER ANIMATIONS
+========================= */
+
+/* Main Footer Container */
+.footer.fade-in-element {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: all 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.footer.fade-in-element.animated {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Footer Columns */
+.footer .row > div {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: all 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+/* Staggered Column Animations */
+.footer.animated .row > .col-lg-4 { 
+    opacity: 1;
+    transform: translateY(0);
+    transition-delay: 0.2s; 
+}
+
+.footer.animated .row > .col-lg-2 { 
+    opacity: 1;
+    transform: translateY(0);
+    transition-delay: 0.3s; 
+}
+
+.footer.animated .row > .col-lg-3:nth-child(3) { 
+    opacity: 1;
+    transform: translateY(0);
+    transition-delay: 0.4s; 
+}
+
+.footer.animated .row > .col-lg-3:nth-child(4) { 
+    opacity: 1;
+    transform: translateY(0);
+    transition-delay: 0.5s; 
+}
+
+/* Social Icons */
+.footer .social-icons .social-icon {
+    opacity: 0;
+    transform: scale(0.8);
+    transition: all 0.4s ease-out;
+}
+
+.footer.animated .social-icons .social-icon:nth-child(1) { transition-delay: 0.6s; }
+.footer.animated .social-icons .social-icon:nth-child(2) { transition-delay: 0.7s; }
+.footer.animated .social-icons .social-icon:nth-child(3) { transition-delay: 0.8s; }
+.footer.animated .social-icons .social-icon:nth-child(4) { transition-delay: 0.9s; }
+.footer.animated .social-icons .social-icon:nth-child(5) { transition-delay: 1.0s; }
+.footer.animated .social-icons .social-icon:nth-child(6) { transition-delay: 1.1s; }
+
+.footer.animated .social-icons .social-icon {
+    opacity: 1;
+    transform: scale(1);
+}
+
+/* Email Link */
+.footer .email-link {
+    opacity: 0;
+    transform: translateX(-10px);
+    transition: all 0.4s ease-out;
+}
+
+.footer.animated .email-link {
+    opacity: 1;
+    transform: translateX(0);
+    transition-delay: 1.2s;
+}
+
+/* Copyright Section */
+.footer .copyright-row {
+    opacity: 1;
+    transform: translateY(15px);
+    transition: all 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.footer .copyright-row > div {
+    opacity: 0;
+    transform: translateY(10px);
+    transition: all 0.4s ease-out;
+}
+
+.footer.animated .copyright-row {
+    transform: translateY(0);
+}
+
+.footer.animated .copyright-row > div:nth-child(1) {
+    opacity: 1;
+    transform: translateY(0);
+    transition-delay: 1.3s;
+}
+
+.footer.animated .copyright-row > div:nth-child(2) {
+    opacity: 1;
+    transform: translateY(0);
+    transition-delay: 1.4s;
+}
+
+/* HR Line */
+.footer hr {
+    opacity: 0;
+    transform: scaleX(0);
+    transition: all 0.4s ease-out;
+}
+
+.footer.animated hr {
+    opacity: 1;
+    transform: scaleX(1);
+    transition-delay: 1.1s;
+}
+
+/* =========================
+   HOVER EFFECTS & INTERACTIONS
+========================= */
+
+/* Button Magnetic Effect */
+.btn-magnetic {
+    position: relative;
+    overflow: hidden;
+    transition: all 0.3s ease;
+}
+
+.btn-magnetic:hover {
+    transform: translateY(-3px);
+}
+
+/* Navigation Links */
+.nav-link {
+    position: relative;
+    transition: all 0.3s ease;
+}
+
+.nav-link::after {
+    content: '';
+    position: absolute;
+    bottom: -5px;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background: var(--accent-orange);
+    transition: width 0.3s ease;
+}
+
+.nav-link:hover::after {
+    width: 100%;
+}
+
+.nav-link:hover {
+    transform: translateY(-2px);
+}
+
+/* Social Icons */
+.social-icon {
+    transition: all 0.3s ease;
+}
+
+.social-icon:hover {
+    background: var(--accent-orange);
+    color: var(--primary-black);
+    transform: translateY(-5px);
+}
+
+/* Form Inputs */
+.form-control {
+    transition: all 0.3s ease;
+}
+
+.form-control:focus {
+    transform: scale(1.02);
+    border-color: var(--accent-orange);
+    box-shadow: 0 0 20px rgba(255, 107, 53, 0.2);
+}
+
+/* Footer Links */
+.footer a {
+    transition: color 0.3s ease;
+}
+
+.footer a:hover {
+    color: var(--accent-orange);
+    text-decoration: none;
+}
+
+/* =========================
+   HERO SECTION OVERRIDES
+========================= */
+.hero-section {
+    animation: hero-bg-move 20s ease-in-out infinite alternate;
+    opacity: 1 !important;
+    visibility: visible !important;
+}
+
+
+/* =========================
+   ACCESSIBILITY: REDUCED MOTION
+========================= */
+@media (prefers-reduced-motion: reduce) {
+    .fade-in-element,
+    .service-card,
+    .video-card,
+    .quote-box,
+    .btn-custom,
+    .btn-outline-custom,
+    .stat-item,
+    .footer,
+    .footer .row > div,
+    .footer .social-icons .social-icon,
+    .footer .email-link,
+    .footer .copyright-row,
+    .footer hr {
+        opacity: 1 !important;
+        transform: none !important;
+        transition: none !important;
+        animation: none !important;
+    }
+}
+
+/* =========================
+   MOBILE OPTIMIZATIONS
+========================= */
+@media (max-width: 768px) {
+    /* Reduce hover effects on mobile */
+    .service-card:hover {
+        transform: translateY(-5px) scale(1.01);
+    }
+    
+    .btn-magnetic:hover {
+        transform: translateY(-2px);
+    }
+    
+    /* Reduce animation distances */
+    .fade-in-element {
+        transform: translateY(20px);
+    }
+    
+    .service-card {
+        transform: translateY(30px) scale(0.95);
+    }
+    
+    /* Footer mobile adjustments */
+    .footer.fade-in-element {
+        transform: translateY(20px);
+    }
+    
+    .footer .row > div {
+        transform: translateY(15px);
+    }
+    
+    /* Simplify delays for better performance */
+    .footer.animated .row > div {
+        transition-delay: 0.2s !important;
+    }
+    
+    .footer.animated .social-icons .social-icon {
+        transition-delay: 0.3s !important;
+    }
+}
+
+/* =========================
+   THEME & COLOR FIXES
+========================= */
+.dark-bg .text-muted,
+.text-muted {
+    color: #b0b0b0 !important;
+}
+
+.dark-bg a.text-muted,
+a.text-muted {
+    color: #4c4ee3 !important;
+}
+
+.dark-bg a.text-muted:hover,
+a.text-muted:hover {
+    color: var(--accent-orange) !important;
+    text-decoration: none;
+}
