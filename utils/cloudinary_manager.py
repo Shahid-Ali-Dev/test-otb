@@ -29,6 +29,97 @@ class CloudinaryManager:
         except Exception as e:
             print(f"❌ Cloudinary connection failed: {str(e)}")
             return False
+        
+    @staticmethod
+    def upload_profile_picture(file, user_id):
+        """Upload user profile picture to Cloudinary"""
+        try:
+            CloudinaryManager.configure()
+            
+            # Generate unique public_id for the user
+            public_id = f"shout-otb/profile-pictures/user-{user_id}"
+            
+            # Upload the image
+            result = cloudinary.uploader.upload(
+                file,
+                public_id=public_id,
+                folder="shout-otb/profile-pictures",
+                overwrite=True,
+                invalidate=True,
+                transformation=[
+                    {'width': 300, 'height': 300, 'crop': 'fill', 'gravity': 'face'},
+                    {'quality': 'auto:good'},
+                    {'format': 'webp'}  # Convert to modern format
+                ]
+            )
+            
+            print(f"✅ Profile picture uploaded for user {user_id}: {result['secure_url']}")
+            return result['secure_url']
+            
+        except Exception as e:
+            print(f"❌ Error uploading profile picture: {str(e)}")
+            return None
+
+    @staticmethod
+    def delete_profile_picture(user_id):
+        """Delete user's profile picture from Cloudinary"""
+        try:
+            CloudinaryManager.configure()
+            
+            public_id = f"shout-otb/profile-pictures/user-{user_id}"
+            
+            result = cloudinary.uploader.destroy(
+                public_id,
+                invalidate=True
+            )
+            
+            if result.get('result') == 'ok':
+                print(f"✅ Profile picture deleted for user {user_id}")
+                return True
+            else:
+                print(f"⚠️ No profile picture found for user {user_id}")
+                return False
+                
+        except Exception as e:
+            print(f"❌ Error deleting profile picture: {str(e)}")
+            return False
+
+    @staticmethod
+    def get_profile_picture_url(user_id):
+        """Get the URL for a user's profile picture"""
+        try:
+            CloudinaryManager.configure()
+            
+            public_id = f"shout-otb/profile-pictures/user-{user_id}"
+            
+            # Generate URL without making API call
+            url = cloudinary.CloudinaryImage(public_id).build_url(
+                transformation=[
+                    {'width': 300, 'height': 300, 'crop': 'fill', 'gravity': 'face'},
+                    {'quality': 'auto:good'},
+                    {'format': 'webp'}
+                ]
+            )
+            
+            return url
+            
+        except Exception as e:
+            print(f"❌ Error generating profile picture URL: {str(e)}")
+            return None
+
+    @staticmethod
+    def upload_default_profile_picture():
+        """Upload a default profile picture (optional)"""
+        try:
+            CloudinaryManager.configure()
+            
+            # You can create a default avatar image and upload it
+            # This is optional - you can use initials as fallback instead
+            pass
+            
+        except Exception as e:
+            print(f"❌ Error uploading default profile picture: {str(e)}")
+            return None
 
     @staticmethod
     def delete_all_service_videos():
