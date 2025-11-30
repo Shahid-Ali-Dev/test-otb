@@ -188,3 +188,51 @@ class DatabaseManager:
             print(f"Error creating user review: {str(e)}")
             db.session.rollback()
             return False
+        
+    def get_user_by_google_id(self, google_id):
+        """Get user by Google ID"""
+        try:
+            return User.query.filter_by(google_id=google_id).first()
+        except Exception as e:
+            print(f"Error getting user by Google ID: {str(e)}")
+            return None
+    
+    def create_google_user(self, user_data):
+        """Create a new user with Google OAuth"""
+        try:
+            user = User(
+                email=user_data['email'],
+                name=user_data['name'],
+                google_id=user_data['google_id'],
+                provider='google',
+                profile_picture=user_data.get('profile_picture'),
+                password='',  # ✅ Set empty string instead of None
+                created_at=datetime.utcnow(),
+                last_login=datetime.utcnow()
+            )
+            
+            db.session.add(user)
+            db.session.commit()
+            return user
+        except Exception as e:
+            db.session.rollback()
+            print(f"Error creating Google user: {str(e)}")
+            return None
+    
+    def update_user_from_google(self, user, user_data):
+        """Update existing user with Google data (if needed)"""
+        try:
+            # Only update name and profile picture if they're not set
+            if not user.name or user.name == 'User':
+                user.name = user_data['name']
+            
+            if not user.profile_picture and user_data.get('profile_picture'):
+                user.profile_picture = user_data['profile_picture']
+            
+            user.last_login = datetime.utcnow()
+            db.session.commit()
+            return user
+        except Exception as e:
+            db.session.rollback()
+            print(f"Error updating user from Google: {str(e)}")
+            return None
