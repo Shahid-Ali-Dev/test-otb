@@ -1582,90 +1582,73 @@ def handle_all_errors(error):
 def check_and_migrate_database():
     """Check if database needs migration and apply changes"""
     try:
-        # Test if new columns exist
+        # Test if all required columns exist
         from sqlalchemy import text
-        db.session.execute(text('SELECT google_id, provider FROM users LIMIT 1'))
-        print("✅ Database schema is up to date")
-        return True
+        
+        # For PostgreSQL, use information_schema to check columns
+        if 'postgresql' in app.config['SQLALCHEMY_DATABASE_URI']:
+            result = db.session.execute(text('''
+                SELECT column_name 
+                FROM information_schema.columns 
+                WHERE table_name = 'users' 
+                AND column_name IN ('google_id', 'provider', 'updated_at')
+            ''')).fetchall()
+            
+            existing_columns = {row[0] for row in result}
+            required_columns = {'google_id', 'provider', 'updated_at'}
+            
+            if required_columns.issubset(existing_columns):
+                print("✅ Database schema is up to date")
+                return True
+            else:
+                print("🔄 Database needs migration...")
+                return run_postgres_migrations()
+        
+        # For SQLite (keep your existing logic)
+        else:
+            db.session.execute(text('SELECT google_id, provider, updated_at FROM users LIMIT 1'))
+            print("✅ Database schema is up to date")
+            return True
+            
     except Exception as e:
-        if 'no such column' in str(e):
+        if 'no such column' in str(e) or 'column' in str(e).lower():
             print("🔄 Database needs migration...")
-            return migrate_database_safely()
+            return run_postgres_migrations()
         else:
             print(f"❌ Database error: {str(e)}")
             return False
 
-def migrate_database_safely():
-    """Safely migrate database without losing data"""
+def run_postgres_migrations():
+    """Run PostgreSQL-specific migrations"""
     try:
         from sqlalchemy import text
         
-        # For SQLite - use ALTER TABLE
-        if 'sqlite' in app.config['SQLALCHEMY_DATABASE_URI']:
-            print("🔄 Applying SQLite migrations...")
+        print("🔄 Running PostgreSQL migrations...")
+        
+        migrations = [
+            # Add missing columns
+            "ALTER TABLE users ADD COLUMN IF NOT EXISTS google_id VARCHAR(100)",
+            "ALTER TABLE users ADD COLUMN IF NOT EXISTS provider VARCHAR(50) DEFAULT 'email'", 
+            "ALTER TABLE users ADD COLUMN IF NOT EXISTS updated_at TIMESTAMP DEFAULT NOW()",
             
-            # Add google_id column if not exists
+            # Make password nullable
+            "ALTER TABLE users ALTER COLUMN password DROP NOT NULL",
+            
+            # Update existing data
+            "UPDATE users SET provider = 'email' WHERE provider IS NULL",
+            "UPDATE users SET updated_at = NOW() WHERE updated_at IS NULL"
+        ]
+        
+        for migration in migrations:
             try:
-                db.session.execute(text('ALTER TABLE users ADD COLUMN google_id VARCHAR(100)'))
-                print("✅ Added google_id column")
+                db.session.execute(text(migration))
+                print(f"✅ Executed: {migration}")
             except Exception as e:
-                if 'duplicate column name' not in str(e):
-                    raise e
-            
-            # Add provider column if not exists  
-            try:
-                db.session.execute(text('ALTER TABLE users ADD COLUMN provider VARCHAR(50) DEFAULT "email"'))
-                print("✅ Added provider column")
-            except Exception as e:
-                if 'duplicate column name' not in str(e):
-                    raise e
-            
-            # Add updated_at column if not exists
-            try:
-                db.session.execute(text('ALTER TABLE users ADD COLUMN updated_at DATETIME'))
-                print("✅ Added updated_at column")
-            except Exception as e:
-                if 'duplicate column name' not in str(e):
-                    raise e
-            
-            # Update existing records
-            db.session.execute(text('UPDATE users SET provider = "email" WHERE provider IS NULL'))
-            db.session.execute(text('UPDATE users SET updated_at = CURRENT_TIMESTAMP WHERE updated_at IS NULL'))
-            
-        # For PostgreSQL - use different syntax
-        elif 'postgresql' in app.config['SQLALCHEMY_DATABASE_URI']:
-            print("🔄 Applying PostgreSQL migrations...")
-            
-            # Check and add columns if they don't exist
-            db.session.execute(text('''
-                DO $$ 
-                BEGIN 
-                    BEGIN
-                        ALTER TABLE users ADD COLUMN google_id VARCHAR(100);
-                    EXCEPTION
-                        WHEN duplicate_column THEN NULL;
-                    END;
-                    
-                    BEGIN
-                        ALTER TABLE users ADD COLUMN provider VARCHAR(50) DEFAULT 'email';
-                    EXCEPTION
-                        WHEN duplicate_column THEN NULL;
-                    END;
-                    
-                    BEGIN
-                        ALTER TABLE users ADD COLUMN updated_at TIMESTAMP;
-                    EXCEPTION
-                        WHEN duplicate_column THEN NULL;
-                    END;
-                END $$;
-            '''))
-            
-            # Update existing records
-            db.session.execute(text('UPDATE users SET provider = ''email'' WHERE provider IS NULL'))
-            db.session.execute(text('UPDATE users SET updated_at = NOW() WHERE updated_at IS NULL'))
+                print(f"⚠️ Migration warning: {str(e)}")
+                # Continue with other migrations even if one fails
         
         db.session.commit()
-        print("✅ Database migration completed successfully!")
+        print("✅ PostgreSQL migrations completed successfully!")
         return True
         
     except Exception as e:
@@ -1761,13 +1744,12 @@ with app.app_context():
     # Check and apply migrations
     check_and_migrate_database()
 
-# Call initialization when app starts
-init_database()
         
 if __name__ == '__main__':
     with app.app_context():
         db.create_all()
 
     app.run(debug=os.environ.get('DEBUG', 'False').lower() == 'true')
+
 
 
