@@ -11,14 +11,18 @@ class User(UserMixin, db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(100), nullable=False)
     email = db.Column(db.String(100), unique=True, nullable=False)
-    password = db.Column(db.String(200), nullable=False)
-    occupation = db.Column(db.String(100))  # NEW: User's occupation/role
-    profile_picture = db.Column(db.String(255))  # NEW: Path to profile picture
+    password = db.Column(db.String(200), nullable=True)  
+    occupation = db.Column(db.String(100))
+    profile_picture = db.Column(db.String(255))
     role = db.Column(db.String(20), default='user')
     provider = db.Column(db.String(20), default='email')
+    google_id = db.Column(db.String(100), unique=True, nullable=True)
     created_at = db.Column(db.DateTime, default=datetime.utcnow)
     last_login = db.Column(db.DateTime, default=datetime.utcnow)
     updated_at = db.Column(db.DateTime, default=datetime.utcnow, onupdate=datetime.utcnow)
+
+    def __repr__(self):
+        return f'<User {self.email} ({self.provider})>'
 
 class PortfolioItem(db.Model):
     __tablename__ = 'portfolio_items'
@@ -251,3 +255,4 @@ class AnalyticsSettings(db.Model):
     __table_args__ = (
         db.UniqueConstraint('platform', 'identifier', name='unique_platform_identifier'),
     )
+
