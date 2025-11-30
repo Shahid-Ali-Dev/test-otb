@@ -13,6 +13,7 @@ from wtforms.validators import DataRequired, Email, EqualTo, Length, Optional
 from flask_login import LoginManager, UserMixin, login_user, logout_user, login_required, current_user
 import os
 import requests
+from utils.google_oauth import google_oauth
 from utils.cloudinary_manager import CloudinaryManager
 from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
@@ -34,16 +35,9 @@ load_dotenv()
 app = Flask(__name__)
 
 # Flask Configuration
-app.config['SECRET_KEY'] = os.environ.get('SECRET_KEY', 'demo-secret-key-123')
-
-# ✅ LOAD ENVIRONMENT VARIABLES FIRST
-load_dotenv()
-
-# ✅ NOW CREATE THE APP WITH DIRECT ENVIRONMENT VARIABLES
-app = Flask(__name__)
-
-# Flask Configuration
-app.config['SECRET_KEY'] = os.environ.get('SECRET_KEY', 'demo-secret-key-123')
+app.config['SECRET_KEY'] = os.environ.get('SECRET_KEY')
+if not app.config['SECRET_KEY']:
+    raise ValueError("No SECRET_KEY set for Flask application")
 
 # Database Configuration - Enhanced for Neon
 database_url = os.environ.get('DATABASE_URL')
@@ -73,6 +67,12 @@ app.config['CLOUDINARY_API_SECRET'] = os.environ.get('CLOUDINARY_API_SECRET')
 app.config['BREVO_SMTP_USER'] = os.environ.get('BREVO_SMTP_USER')
 app.config['BREVO_SMTP_PASSWORD'] = os.environ.get('BREVO_SMTP_PASSWORD')
 app.config['DEBUG'] = os.environ.get('DEBUG', 'False').lower() == 'true'
+
+# Google OAuth Configuration
+app.config['GOOGLE_CLIENT_ID'] = os.environ.get('GOOGLE_CLIENT_ID')
+app.config['GOOGLE_CLIENT_SECRET'] = os.environ.get('GOOGLE_CLIENT_SECRET')
+
+google_oauth.init_app(app)
 
 compress = Compress()
 compress.init_app(app)
@@ -214,6 +214,126 @@ def get_portfolio_items():
         print(f"Error getting portfolio items: {str(e)}")
         traceback.print_exc()
         return []
+
+@app.route('/auth/google')
+def google_login():
+    """Initiate Google OAuth flow"""
+    try:
+        authorization_url, state = google_oauth.get_authorization_url()
+        if authorization_url:
+            session['oauth_state'] = state
+            return redirect(authorization_url)
+        else:
+            flash('Failed to initialize Google login.', 'danger')
+            return redirect(url_for('login'))
+    except Exception as e:
+        flash('Error connecting to Google authentication.', 'danger')
+        return redirect(url_for('login'))
+
+@app.route('/auth/google/callback')
+def google_callback():
+    """Handle Google OAuth callback"""
+    try:
+        # Verify state to prevent CSRF
+        if 'oauth_state' not in session or request.args.get('state') != session['oauth_state']:
+            flash('Invalid authentication state.', 'danger')
+            return redirect(url_for('login'))
+        
+        # Get the authorization code from callback
+        authorization_response = request.url
+        
+        # Exchange code for tokens
+        token = google_oauth.fetch_token(authorization_response)
+        if not token:
+            flash('Failed to authenticate with Google.', 'danger')
+            return redirect(url_for('login'))
+        
+        # Get user info from Google
+        user_info = google_oauth.get_user_info(token)
+        if not user_info:
+            flash('Failed to get user information from Google.', 'danger')
+            return redirect(url_for('login'))
+        
+        # Extract user data
+        google_id = user_info.get('sub')
+        email = user_info.get('email')
+        name = user_info.get('name', 'Google User')
+        profile_picture = user_info.get('picture')
+        
+        if not email:
+            flash('Google account email is required.', 'danger')
+            return redirect(url_for('login'))
+        
+        # Check if user exists by Google ID
+        user_data = db_manager.get_user_by_google_id(google_id)
+        
+        if user_data:
+            # Existing Google user - login
+            user = User(user_data)
+            login_user(user)
+            
+            # Update last login
+            db_manager.update_last_login(user_data.id)
+            
+            flash('Login with Google successful!', 'success')
+            
+        else:
+            # Check if user exists by email (regular user wanting to use Google)
+            existing_user = db_manager.get_user_by_email(email)
+            
+            if existing_user:
+                # User exists with email - link Google account
+                if existing_user.provider == 'email':
+                    # Update existing email user to use Google
+                    updated_user = db_manager.update_user_from_google(
+                        existing_user, 
+                        {
+                            'google_id': google_id,
+                            'name': name,
+                            'profile_picture': profile_picture
+                        }
+                    )
+                    
+                    if updated_user:
+                        user = User(updated_user)
+                        login_user(user)
+                        db_manager.update_last_login(updated_user.id)
+                        flash('Your account has been linked with Google!', 'success')
+                    else:
+                        flash('Error linking Google account.', 'danger')
+                        return redirect(url_for('login'))
+                else:
+                    # User exists but with different provider
+                    flash('An account with this email already exists with a different login method.', 'danger')
+                    return redirect(url_for('login'))
+            else:
+                # New user - create account
+                new_user_data = {
+                    'google_id': google_id,
+                    'email': email,
+                    'name': name,
+                    'profile_picture': profile_picture
+                }
+                
+                user_model = db_manager.create_google_user(new_user_data)
+                if user_model:
+                    user = User(user_model)
+                    login_user(user)
+                    flash('Account created with Google successfully!', 'success')
+                else:
+                    flash('Error creating account with Google.', 'danger')
+                    return redirect(url_for('login'))
+        
+        # Redirect based on role
+        if current_user.role == 'admin':
+            return redirect(url_for('admin_portfolio'))
+        else:
+            return redirect(url_for('index'))
+            
+    except Exception as e:
+        print(f"Google OAuth error: {str(e)}")
+        flash('Authentication failed. Please try again.', 'danger')
+        return redirect(url_for('login'))
     
 def save_portfolio_item(item_data):
     """Save portfolio item to PostgreSQL database"""
@@ -273,7 +393,10 @@ def profile():
                     return render_template('auth/profile.html', form=form)
                 
                 # Delete old profile picture from Cloudinary if exists
-                if current_user.profile_picture and 'cloudinary.com' in current_user.profile_picture:
+                # Only delete if it's a Cloudinary URL and not a Google profile picture
+                if (current_user.profile_picture and 
+                    'cloudinary.com' in current_user.profile_picture and
+                    'googleusercontent.com' not in current_user.profile_picture):
                     CloudinaryManager.delete_profile_picture(current_user.id)
                 
                 # Upload new profile picture to Cloudinary
@@ -1245,6 +1368,7 @@ def admin_reviews():
                          approved_count=approved_count,
                          today_count=today_count)
 
+
 @app.route('/admin/review/approve/<int:review_id>', methods=['POST'])
 @login_required
 def approve_review(review_id):
@@ -1308,29 +1432,35 @@ def login():
     form = LoginForm()
     if form.validate_on_submit():
         try:
-            # Get user from PostgreSQL
+            # Get user from database
             user_data = db_manager.get_user_by_email(form.email.data)
             
-            if user_data and user_data.provider == 'email':
-                # Verify password
-                if check_password(form.password.data, user_data.password):
+            if not user_data:
+                flash('Invalid email or password.', 'danger')
+                return redirect(url_for('login'))
+            
+            # Handle different provider types
+            if user_data.provider == 'email':
+                # Email/password user - verify password
+                if user_data.password and check_password(form.password.data, user_data.password):
                     user = User(user_data)
                     login_user(user)
-                    
-                    # Update last login
                     db_manager.update_last_login(user_data.id)
-                    
                     flash('Login successful!', 'success')
                     
-                    # Redirect to admin panel if admin, else to home
                     if user.role == 'admin':
                         return redirect(url_for('admin_portfolio'))
                     else:
                         return redirect(url_for('index'))
                 else:
                     flash('Invalid email or password.', 'danger')
+                    
+            elif user_data.provider == 'google':
+                # Google OAuth user - show appropriate message
+                flash('This account uses Google login. Please use the "Continue with Google" button.', 'info')
+                
             else:
-                flash('Invalid email or password.', 'danger')
+                flash('Invalid login method.', 'danger')
                 
         except Exception as e:
             flash('An error occurred during login. Please try again.', 'danger')
@@ -1449,6 +1579,100 @@ def handle_all_errors(error):
         error_message=str(error) if app.config['DEBUG'] else None
     ), error_code
 
+def check_and_migrate_database():
+    """Check if database needs migration and apply changes"""
+    try:
+        # Test if new columns exist
+        from sqlalchemy import text
+        db.session.execute(text('SELECT google_id, provider FROM users LIMIT 1'))
+        print("✅ Database schema is up to date")
+        return True
+    except Exception as e:
+        if 'no such column' in str(e):
+            print("🔄 Database needs migration...")
+            return migrate_database_safely()
+        else:
+            print(f"❌ Database error: {str(e)}")
+            return False
+
+def migrate_database_safely():
+    """Safely migrate database without losing data"""
+    try:
+        from sqlalchemy import text
+        
+        # For SQLite - use ALTER TABLE
+        if 'sqlite' in app.config['SQLALCHEMY_DATABASE_URI']:
+            print("🔄 Applying SQLite migrations...")
+            
+            # Add google_id column if not exists
+            try:
+                db.session.execute(text('ALTER TABLE users ADD COLUMN google_id VARCHAR(100)'))
+                print("✅ Added google_id column")
+            except Exception as e:
+                if 'duplicate column name' not in str(e):
+                    raise e
+            
+            # Add provider column if not exists  
+            try:
+                db.session.execute(text('ALTER TABLE users ADD COLUMN provider VARCHAR(50) DEFAULT "email"'))
+                print("✅ Added provider column")
+            except Exception as e:
+                if 'duplicate column name' not in str(e):
+                    raise e
+            
+            # Add updated_at column if not exists
+            try:
+                db.session.execute(text('ALTER TABLE users ADD COLUMN updated_at DATETIME'))
+                print("✅ Added updated_at column")
+            except Exception as e:
+                if 'duplicate column name' not in str(e):
+                    raise e
+            
+            # Update existing records
+            db.session.execute(text('UPDATE users SET provider = "email" WHERE provider IS NULL'))
+            db.session.execute(text('UPDATE users SET updated_at = CURRENT_TIMESTAMP WHERE updated_at IS NULL'))
+            
+        # For PostgreSQL - use different syntax
+        elif 'postgresql' in app.config['SQLALCHEMY_DATABASE_URI']:
+            print("🔄 Applying PostgreSQL migrations...")
+            
+            # Check and add columns if they don't exist
+            db.session.execute(text('''
+                DO $$ 
+                BEGIN 
+                    BEGIN
+                        ALTER TABLE users ADD COLUMN google_id VARCHAR(100);
+                    EXCEPTION
+                        WHEN duplicate_column THEN NULL;
+                    END;
+                    
+                    BEGIN
+                        ALTER TABLE users ADD COLUMN provider VARCHAR(50) DEFAULT 'email';
+                    EXCEPTION
+                        WHEN duplicate_column THEN NULL;
+                    END;
+                    
+                    BEGIN
+                        ALTER TABLE users ADD COLUMN updated_at TIMESTAMP;
+                    EXCEPTION
+                        WHEN duplicate_column THEN NULL;
+                    END;
+                END $$;
+            '''))
+            
+            # Update existing records
+            db.session.execute(text('UPDATE users SET provider = ''email'' WHERE provider IS NULL'))
+            db.session.execute(text('UPDATE users SET updated_at = NOW() WHERE updated_at IS NULL'))
+        
+        db.session.commit()
+        print("✅ Database migration completed successfully!")
+        return True
+        
+    except Exception as e:
+        db.session.rollback()
+        print(f"❌ Migration failed: {str(e)}")
+        return False
+    
 # Add database initialization
 @app.cli.command("init-db")
 def init_db():
@@ -1529,6 +1753,14 @@ def init_database():
             import traceback
             traceback.print_exc()
 
+# After db initialization
+with app.app_context():
+    # Your existing init_database() call
+    init_database()
+    
+    # Check and apply migrations
+    check_and_migrate_database()
+
 # Call initialization when app starts
 init_database()
         
@@ -1537,3 +1769,5 @@ if __name__ == '__main__':
         db.create_all()
 
     app.run(debug=os.environ.get('DEBUG', 'False').lower() == 'true')
+
+
