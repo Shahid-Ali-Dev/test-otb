@@ -22,4 +22,5 @@ matplotlib==3.7.2
 seaborn==0.12.2
 reportlab==4.0.4
 Pillow==10.0.0
+authlib==1.2.0
 groq==0.3.0
